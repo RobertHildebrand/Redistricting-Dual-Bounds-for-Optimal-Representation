@@ -1,0 +1,12 @@
+Files summary:
+
+Election Data.ipynb:
+	Processes precinct voter data and disaggregates it to block, block group, tract, and county levels.
+
+
+VAP and BVAP ounds without contiguity:
+	Optimization problems using Gurobi to compute bounds to plug into the paper.
+
+RDH_API-Creating Election Data:
+	Downloads data directly from the redistrictig Data hub using Robert's API key.
+
