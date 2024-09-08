@@ -1,0 +1,578 @@
+{
+    "nodes": [
+        {
+            "name": "Hancock",
+            "index": 12,
+            "GEOID20": "28045",
+            "GEOID": "0500000US28045",
+            "district": 0
+        },
+        {
+            "name": "Smith",
+            "index": 13,
+            "GEOID20": "28129",
+            "GEOID": "0500000US28129",
+            "district": 0
+        },
+        {
+            "name": "Harrison",
+            "index": 21,
+            "GEOID20": "28047",
+            "GEOID": "0500000US28047",
+            "district": 0
+        },
+        {
+            "name": "Jackson",
+            "index": 22,
+            "GEOID20": "28059",
+            "GEOID": "0500000US28059",
+            "district": 0
+        },
+        {
+            "name": "Jones",
+            "index": 40,
+            "GEOID20": "28067",
+            "GEOID": "0500000US28067",
+            "district": 0
+        },
+        {
+            "name": "Lamar",
+            "index": 54,
+            "GEOID20": "28073",
+            "GEOID": "0500000US28073",
+            "district": 0
+        },
+        {
+            "name": "Pearl River",
+            "index": 63,
+            "GEOID20": "28109",
+            "GEOID": "0500000US28109",
+            "district": 0
+        },
+        {
+            "name": "Perry",
+            "index": 64,
+            "GEOID20": "28111",
+            "GEOID": "0500000US28111",
+            "district": 0
+        },
+        {
+            "name": "Stone",
+            "index": 74,
+            "GEOID20": "28131",
+            "GEOID": "0500000US28131",
+            "district": 0
+        },
+        {
+            "name": "Rankin",
+            "index": 75,
+            "GEOID20": "28121",
+            "GEOID": "0500000US28121",
+            "district": 0
+        },
+        {
+            "name": "George",
+            "index": 77,
+            "GEOID20": "28039",
+            "GEOID": "0500000US28039",
+            "district": 0
+        },
+        {
+            "name": "Pontotoc",
+            "index": 1,
+            "GEOID20": "28115",
+            "GEOID": "0500000US28115",
+            "district": 1
+        },
+        {
+            "name": "Tate",
+            "index": 3,
+            "GEOID20": "28137",
+            "GEOID": "0500000US28137",
+            "district": 1
+        },
+        {
+            "name": "Prentiss",
+            "index": 6,
+            "GEOID20": "28117",
+            "GEOID": "0500000US28117",
+            "district": 1
+        },
+        {
+            "name": "Calhoun",
+            "index": 9,
+            "GEOID20": "28013",
+            "GEOID": "0500000US28013",
+            "district": 1
+        },
+        {
+            "name": "Winston",
+            "index": 16,
+            "GEOID20": "28159",
+            "GEOID": "0500000US28159",
+            "district": 1
+        },
+        {
+            "name": "Marshall",
+            "index": 24,
+            "GEOID20": "28093",
+            "GEOID": "0500000US28093",
+            "district": 1
+        },
+        {
+            "name": "Tishomingo",
+            "index": 26,
+            "GEOID20": "28141",
+            "GEOID": "0500000US28141",
+            "district": 1
+        },
+        {
+            "name": "Quitman",
+            "index": 27,
+            "GEOID20": "28119",
+            "GEOID": "0500000US28119",
+            "district": 1
+        },
+        {
+            "name": "Leake",
+            "index": 29,
+            "GEOID20": "28079",
+            "GEOID": "0500000US28079",
+            "district": 1
+        },
+        {
+            "name": "Neshoba",
+            "index": 32,
+            "GEOID20": "28099",
+            "GEOID": "0500000US28099",
+            "district": 1
+        },
+        {
+            "name": "Lee",
+            "index": 33,
+            "GEOID20": "28081",
+            "GEOID": "0500000US28081",
+            "district": 1
+        },
+        {
+            "name": "Itawamba",
+            "index": 37,
+            "GEOID20": "28057",
+            "GEOID": "0500000US28057",
+            "district": 1
+        },
+        {
+            "name": "DeSoto",
+            "index": 39,
+            "GEOID20": "28033",
+            "GEOID": "0500000US28033",
+            "district": 1
+        },
+        {
+            "name": "Webster",
+            "index": 44,
+            "GEOID20": "28155",
+            "GEOID": "0500000US28155",
+            "district": 1
+        },
+        {
+            "name": "Union",
+            "index": 48,
+            "GEOID20": "28145",
+            "GEOID": "0500000US28145",
+            "district": 1
+        },
+        {
+            "name": "Benton",
+            "index": 52,
+            "GEOID20": "28009",
+            "GEOID": "0500000US28009",
+            "district": 1
+        },
+        {
+            "name": "Alcorn",
+            "index": 55,
+            "GEOID20": "28003",
+            "GEOID": "0500000US28003",
+            "district": 1
+        },
+        {
+            "name": "Lafayette",
+            "index": 56,
+            "GEOID20": "28071",
+            "GEOID": "0500000US28071",
+            "district": 1
+        },
+        {
+            "name": "Carroll",
+            "index": 57,
+            "GEOID20": "28015",
+            "GEOID": "0500000US28015",
+            "district": 1
+        },
+        {
+            "name": "Montgomery",
+            "index": 60,
+            "GEOID20": "28097",
+            "GEOID": "0500000US28097",
+            "district": 1
+        },
+        {
+            "name": "Choctaw",
+            "index": 61,
+            "GEOID20": "28019",
+            "GEOID": "0500000US28019",
+            "district": 1
+        },
+        {
+            "name": "Tippah",
+            "index": 62,
+            "GEOID20": "28139",
+            "GEOID": "0500000US28139",
+            "district": 1
+        },
+        {
+            "name": "Tallahatchie",
+            "index": 68,
+            "GEOID20": "28135",
+            "GEOID": "0500000US28135",
+            "district": 1
+        },
+        {
+            "name": "Yalobusha",
+            "index": 71,
+            "GEOID20": "28161",
+            "GEOID": "0500000US28161",
+            "district": 1
+        },
+        {
+            "name": "Monroe",
+            "index": 78,
+            "GEOID20": "28095",
+            "GEOID": "0500000US28095",
+            "district": 1
+        },
+        {
+            "name": "Oktibbeha",
+            "index": 81,
+            "GEOID20": "28105",
+            "GEOID": "0500000US28105",
+            "district": 1
+        },
+        {
+            "name": "Attala",
+            "index": 5,
+            "GEOID20": "28007",
+            "GEOID": "0500000US28007",
+            "district": 2
+        },
+        {
+            "name": "Greene",
+            "index": 10,
+            "GEOID20": "28041",
+            "GEOID": "0500000US28041",
+            "district": 2
+        },
+        {
+            "name": "Wayne",
+            "index": 15,
+            "GEOID20": "28153",
+            "GEOID": "0500000US28153",
+            "district": 2
+        },
+        {
+            "name": "Humphreys",
+            "index": 17,
+            "GEOID20": "28053",
+            "GEOID": "0500000US28053",
+            "district": 2
+        },
+        {
+            "name": "Noxubee",
+            "index": 18,
+            "GEOID20": "28103",
+            "GEOID": "0500000US28103",
+            "district": 2
+        },
+        {
+            "name": "Leflore",
+            "index": 19,
+            "GEOID20": "28083",
+            "GEOID": "0500000US28083",
+            "district": 2
+        },
+        {
+            "name": "Coahoma",
+            "index": 20,
+            "GEOID20": "28027",
+            "GEOID": "0500000US28027",
+            "district": 2
+        },
+        {
+            "name": "Panola",
+            "index": 23,
+            "GEOID20": "28107",
+            "GEOID": "0500000US28107",
+            "district": 2
+        },
+        {
+            "name": "Grenada",
+            "index": 25,
+            "GEOID20": "28043",
+            "GEOID": "0500000US28043",
+            "district": 2
+        },
+        {
+            "name": "Clay",
+            "index": 30,
+            "GEOID20": "28025",
+            "GEOID": "0500000US28025",
+            "district": 2
+        },
+        {
+            "name": "Sunflower",
+            "index": 34,
+            "GEOID20": "28133",
+            "GEOID": "0500000US28133",
+            "district": 2
+        },
+        {
+            "name": "Lauderdale",
+            "index": 41,
+            "GEOID20": "28075",
+            "GEOID": "0500000US28075",
+            "district": 2
+        },
+        {
+            "name": "Madison",
+            "index": 45,
+            "GEOID20": "28089",
+            "GEOID": "0500000US28089",
+            "district": 2
+        },
+        {
+            "name": "Jasper",
+            "index": 46,
+            "GEOID20": "28061",
+            "GEOID": "0500000US28061",
+            "district": 2
+        },
+        {
+            "name": "Chickasaw",
+            "index": 47,
+            "GEOID20": "28017",
+            "GEOID": "0500000US28017",
+            "district": 2
+        },
+        {
+            "name": "Kemper",
+            "index": 49,
+            "GEOID20": "28069",
+            "GEOID": "0500000US28069",
+            "district": 2
+        },
+        {
+            "name": "Washington",
+            "index": 50,
+            "GEOID20": "28151",
+            "GEOID": "0500000US28151",
+            "district": 2
+        },
+        {
+            "name": "Lowndes",
+            "index": 53,
+            "GEOID20": "28087",
+            "GEOID": "0500000US28087",
+            "district": 2
+        },
+        {
+            "name": "Tunica",
+            "index": 59,
+            "GEOID20": "28143",
+            "GEOID": "0500000US28143",
+            "district": 2
+        },
+        {
+            "name": "Bolivar",
+            "index": 65,
+            "GEOID20": "28011",
+            "GEOID": "0500000US28011",
+            "district": 2
+        },
+        {
+            "name": "Newton",
+            "index": 67,
+            "GEOID20": "28101",
+            "GEOID": "0500000US28101",
+            "district": 2
+        },
+        {
+            "name": "Clarke",
+            "index": 72,
+            "GEOID20": "28023",
+            "GEOID": "0500000US28023",
+            "district": 2
+        },
+        {
+            "name": "Scott",
+            "index": 79,
+            "GEOID20": "28123",
+            "GEOID": "0500000US28123",
+            "district": 2
+        },
+        {
+            "name": "Holmes",
+            "index": 80,
+            "GEOID20": "28051",
+            "GEOID": "0500000US28051",
+            "district": 2
+        },
+        {
+            "name": "Covington",
+            "index": 0,
+            "GEOID20": "28031",
+            "GEOID": "0500000US28031",
+            "district": 3
+        },
+        {
+            "name": "Yazoo",
+            "index": 2,
+            "GEOID20": "28163",
+            "GEOID": "0500000US28163",
+            "district": 3
+        },
+        {
+            "name": "Lawrence",
+            "index": 4,
+            "GEOID20": "28077",
+            "GEOID": "0500000US28077",
+            "district": 3
+        },
+        {
+            "name": "Pike",
+            "index": 7,
+            "GEOID20": "28113",
+            "GEOID": "0500000US28113",
+            "district": 3
+        },
+        {
+            "name": "Copiah",
+            "index": 8,
+            "GEOID20": "28029",
+            "GEOID": "0500000US28029",
+            "district": 3
+        },
+        {
+            "name": "Amite",
+            "index": 11,
+            "GEOID20": "28005",
+            "GEOID": "0500000US28005",
+            "district": 3
+        },
+        {
+            "name": "Claiborne",
+            "index": 14,
+            "GEOID20": "28021",
+            "GEOID": "0500000US28021",
+            "district": 3
+        },
+        {
+            "name": "Wilkinson",
+            "index": 28,
+            "GEOID20": "28157",
+            "GEOID": "0500000US28157",
+            "district": 3
+        },
+        {
+            "name": "Franklin",
+            "index": 31,
+            "GEOID20": "28037",
+            "GEOID": "0500000US28037",
+            "district": 3
+        },
+        {
+            "name": "Jefferson",
+            "index": 35,
+            "GEOID20": "28063",
+            "GEOID": "0500000US28063",
+            "district": 3
+        },
+        {
+            "name": "Adams",
+            "index": 36,
+            "GEOID20": "28001",
+            "GEOID": "0500000US28001",
+            "district": 3
+        },
+        {
+            "name": "Hinds",
+            "index": 38,
+            "GEOID20": "28049",
+            "GEOID": "0500000US28049",
+            "district": 3
+        },
+        {
+            "name": "Walthall",
+            "index": 42,
+            "GEOID20": "28147",
+            "GEOID": "0500000US28147",
+            "district": 3
+        },
+        {
+            "name": "Jefferson Davis",
+            "index": 43,
+            "GEOID20": "28065",
+            "GEOID": "0500000US28065",
+            "district": 3
+        },
+        {
+            "name": "Issaquena",
+            "index": 51,
+            "GEOID20": "28055",
+            "GEOID": "0500000US28055",
+            "district": 3
+        },
+        {
+            "name": "Lincoln",
+            "index": 58,
+            "GEOID20": "28085",
+            "GEOID": "0500000US28085",
+            "district": 3
+        },
+        {
+            "name": "Warren",
+            "index": 66,
+            "GEOID20": "28149",
+            "GEOID": "0500000US28149",
+            "district": 3
+        },
+        {
+            "name": "Sharkey",
+            "index": 69,
+            "GEOID20": "28125",
+            "GEOID": "0500000US28125",
+            "district": 3
+        },
+        {
+            "name": "Forrest",
+            "index": 70,
+            "GEOID20": "28035",
+            "GEOID": "0500000US28035",
+            "district": 3
+        },
+        {
+            "name": "Simpson",
+            "index": 73,
+            "GEOID20": "28127",
+            "GEOID": "0500000US28127",
+            "district": 3
+        },
+        {
+            "name": "Marion",
+            "index": 76,
+            "GEOID20": "28091",
+            "GEOID": "0500000US28091",
+            "district": 3
+        }
+    ]
+}

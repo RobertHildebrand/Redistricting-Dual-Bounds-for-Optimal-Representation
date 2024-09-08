@@ -1,0 +1,6 @@
+full_path,filename,BVAP_reps,Dem_reps,Rep_reps
+results-ALMSLASC_county_step-ordered\SC-county-step-ordered-25.json,SC-county-step-ordered-25,1.199394884,1.553079481,5.446920519
+results-ALMSLASC_county_step-ordered\SC-county-step-ordered-40.json,SC-county-step-ordered-40,1.199394884,1.553079481,5.446920519
+results-ALMSLASC_county_step-ordered\SC-county-step-ordered-90.json,SC-county-step-ordered-90,1.198622196,1.553434105,5.446565895
+data\bestruns\SC-county-BNPWL-7.json,SC-county-BNPWL-7,1.334265032,1.872046598,5.127953402
+results_for_config-rob-tests-BNPWL\SC-county-LogEPWL-10.json,SC-county-LogEPWL-10,1.334265032,1.872046598,5.127953402

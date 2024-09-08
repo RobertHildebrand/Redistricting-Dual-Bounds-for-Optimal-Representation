@@ -1,0 +1,105 @@
+
+Gurobi 9.1.1 (win64) logging started Sat Sep  7 19:53:48 2024
+
+Changed value of parameter LogFile to results/ExampleConfig/SC-county-step-max-45.log
+   Prev:   Default: 
+Changed value of parameter TimeLimit to 10.0
+   Prev: inf  Min: 0.0  Max: inf  Default: inf
+
+Gurobi 9.1.1 (win64) logging started Sat Sep  7 19:53:48 2024
+
+Changed value of parameter LogFile to results/ExampleConfig/SC-county-step-max-45.log
+   Prev:   Default: 
+Warning: variable name "lam(0, 0, 'in')" has a space
+Warning: constraint name "Grad_cut ub_0" has a space
+Warning: to let Gurobi read it back, use rlp format
+Changed value of parameter TimeLimit to 10.0
+   Prev: inf  Min: 0.0  Max: inf  Default: inf
+Gurobi Optimizer version 9.1.1 build v9.1.1rc0 (win64)
+Thread count: 12 physical cores, 24 logical processors, using up to 24 threads
+Optimize a model with 428 rows, 1261 columns and 10259 nonzeros
+Model fingerprint: 0x73ed5dfd
+Variable types: 577 continuous, 684 integer (684 binary)
+Coefficient statistics:
+  Matrix range     [2e-02, 7e+05]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 7e+05]
+  RHS range        [1e+00, 2e+06]
+
+Warning: Completing partial solution with 638 unfixed non-continuous variables out of 684
+User MIP start produced solution with objective 1.33571 (0.10s)
+Loaded user MIP start with objective 1.33571
+
+Presolve removed 121 rows and 2 columns
+Presolve time: 0.01s
+Presolved: 307 rows, 1259 columns, 8554 nonzeros
+Variable types: 563 continuous, 696 integer (682 binary)
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Root barrier log...
+
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA' NZ     : 5.584e+03
+ Factor NZ  : 6.933e+03 (roughly 1 MByte of memory)
+ Factor Ops : 3.454e+05 (less than 1 second per iteration)
+ Threads    : 1
+
+Barrier performed 0 iterations in 0.14 seconds
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with primal simplex
+
+Root relaxation: objective 1.647087e+00, 420 iterations, 0.02 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    1.64709    0   41    1.33571    1.64709  23.3%     -    0s
+     0     0    1.61591    0   51    1.33571    1.61591  21.0%     -    0s
+     0     0    1.61479    0   45    1.33571    1.61479  20.9%     -    0s
+     0     0    1.60939    0   58    1.33571    1.60939  20.5%     -    0s
+     0     0    1.60906    0   59    1.33571    1.60906  20.5%     -    0s
+     0     0    1.60873    0   71    1.33571    1.60873  20.4%     -    0s
+     0     0    1.60816    0   63    1.33571    1.60816  20.4%     -    0s
+     0     0    1.60759    0   64    1.33571    1.60759  20.4%     -    0s
+     0     0    1.60744    0   62    1.33571    1.60744  20.3%     -    0s
+     0     0    1.60744    0   66    1.33571    1.60744  20.3%     -    0s
+     0     0    1.60744    0   66    1.33571    1.60744  20.3%     -    0s
+     0     2    1.60744    0   63    1.33571    1.60744  20.3%     -    0s
+H 2003  1582                       1.3357092    1.53339  14.8%  30.6    2s
+ 10011  5699    1.34026   38   45    1.33571    1.44180  7.94%  33.0    5s
+H15854  9484                       1.3357092    1.43544  7.47%  29.0    7s
+ 37266 27269    1.34673   96   35    1.33571    1.42576  6.74%  22.1   10s
+
+Cutting planes:
+  Gomory: 15
+  Cover: 49
+  Clique: 1
+  MIR: 36
+  StrongCG: 5
+  Flow cover: 15
+  Inf proof: 2
+  Zero half: 1
+  RLT: 8
+  Relax-and-lift: 4
+  Lazy constraints: 101
+
+Explored 40347 nodes (872935 simplex iterations) in 10.10 seconds
+Thread count was 24 (of 24 available processors)
+
+Solution count 1: 1.33571 
+
+Time limit reached
+Best objective 1.335709209067e+00, best bound 1.425696053676e+00, gap 6.7370%
+
+User-callback calls 83276, time in user-callback 0.30 sec
+Warning: variable name "lam(0, 0, 'in')" has a space
+Warning: constraint name "vertex to district[0]" has a space
+Warning: to let Gurobi read it back, use rlp format
+Warning: variable name "lam(0, 0, 'in')" has a space
+Warning: default variable names used to write solution file
