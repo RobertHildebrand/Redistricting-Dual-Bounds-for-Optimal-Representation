@@ -1,4 +1,15 @@
-# Political Districting to Minimize Cut Edges
+# Redistricting Dual Bounds for Optimal Representation
+
+As mentioned before, this code is largely forked from https://github.com/hamidrezavalidi/Political-Districting-to-Minimize-Cut-Edges.
+We append their readme.md file below for details on how their code works.
+
+Their code was modified to add a number of new models for optimization to compute dual bounds for several problems in political and minority representation.  Please see Example.ipynb for a notebook demonstrating the usage of the code.   
+
+
+
+
+## Political Districting to Minimize Cut Edges (by Hamidreza Validi and Austin Buchanan)
+(This section is borrowed directly from https://github.com/hamidrezavalidi/Political-Districting-to-Minimize-Cut-Edges/blob/master/README.md).
 
 Python code for the [paper](https://github.com/hamidrezavalidi/Political-Districting-to-Minimize-Cut-Edges/blob/master/Political_districting_to_minimize_cut_edges.pdf) "Political districting to minimize cut edges" by Hamidreza Validi and Austin Buchanan.
 
