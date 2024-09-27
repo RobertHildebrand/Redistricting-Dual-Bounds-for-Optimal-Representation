@@ -1,4 +1,6 @@
 import json
+from pathlib import Path
+
 
 def reorder_districts(G, district_indices, ordering):
     if ordering in ('bvap', 'D20'):
@@ -18,6 +20,54 @@ def reorder_districts(G, district_indices, ordering):
         return None, None
 def quantity(G,district_indices, label):
     return {j: sum(int(G.nodes[i][label.upper()]) for i in district_indices[j]) for j in district_indices.keys()}
+
+
+from pathlib import Path
+
+def get_filename(state, string):
+    """
+    Constructs a filename from the state and input string, reads the file,
+    and returns the first non-empty line's file path and objective values.
+
+    Args:
+        state (str): The state code or name.
+        string (str): The input string containing the objective information.
+
+    Returns:
+        tuple: (filename_warm_start, obj_values) where filename_warm_start is a Path object
+               pointing to the first valid file path from the data file, and obj_values 
+               is a list of objective values. Returns None if no valid lines are found.
+    """
+    # Extract object name from the string and construct the target filename
+    try:
+        obj_name = string.split("start_", 1)[1]
+        filename = Path(f"data/objective_sorted/{state}_{obj_name}_sorted.csv")
+    except IndexError:
+        print("Error: 'start_' not found in the string.")
+        return None
+
+    # Attempt to open the file and process its contents
+    try:
+        with filename.open() as f:
+            next(f)  # Skip the header
+
+            # Iterate over lines and find the first non-empty line
+            for line in f:
+                stripped_line = line.strip()
+                if stripped_line:
+                    # Extract filename and objective values
+                    filename_warm_start = Path(*stripped_line.split(",")[0].replace("\\", "/").split("/"))
+                    obj_values = [elem.strip() for elem in stripped_line.split(",")[2:4]]
+
+                    return filename_warm_start, obj_values
+
+    except FileNotFoundError:
+        print(f"Error: File {filename} not found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+    # If no valid lines are found, return None
+    return None
 
 def load_warm_start(state, obj, G, data, start_labels):
     """
@@ -41,29 +91,19 @@ def load_warm_start(state, obj, G, data, start_labels):
     """
         
     heuristic_districts = None
-    
-    def get_filename(state, string):
-        obj_name = string.split("start_", 1)[1]
-        filename = f"data/objective_sorted/{state}_{obj_name}_sorted.csv"
-
-        with open(filename) as f:
-            # skip header
-            next(f)
-            # return first non-empty line
-            for line in f:
-                if line.strip():
-                    return line.split(",")[0].strip(), [elem.strip() for elem in line.split(",")[2:4]]
-
-
-        # if no non-empty line was found, return None
-        return None
 
 
     if obj in start_labels:
         filename_warm_start, obj_values = get_filename(state, data['start_label'])
         heuristic_districts = None
+        print(filename_warm_start)
         if filename_warm_start is not None:
             print(f"Loading best known solution from {filename_warm_start}")
+            
+            
+            print(f"Loading best known solution from {filename_warm_start}")
+        
+        
             with open(filename_warm_start, 'r') as f:
                 data = json.load(f)
 
@@ -135,6 +175,11 @@ def load_warm_start_dem(state, G):
     heuristic_districts = None
     if filename_warm_start is not None:
         print(f"Loading best known solution from {filename_warm_start}")
+        # Assuming filename_warm_start contains the path
+        
+        filename_warm_start = filename_warm_start.replace("\\", "/")
+        print(f"Loading best known solution from {filename_warm_start}")
+        
         with open(filename_warm_start, 'r') as f:
             data = json.load(f)
 
@@ -162,11 +207,19 @@ def load_warm_start_dem(state, G):
 
 
     return heuristic_districts
-def inject_warm_start(m,k,X_ws):
+
+            
+# Inject heuristic warm start
+def inject_X_ws(m,k,X_ws):            
     for j in range(k):
         for i in X_ws[j]:
             m._X[i,j].start = 1
-            
+# Inject heuristic warm start
+def inject_bvap_ws(m,k,bvap_ws, vap_ws):            
+    for j in range(k):
+        m._bvap[j].start = bvap_ws[j]
+        m._vap[j].start = vap_ws[j]
+        
 def inject_heuristic_warm_start(m, heuristic, base, order, k, position, vertex_ordering, heuristic_districts):
     """
     Inject a heuristic warm start solution into a Gurobi model object.

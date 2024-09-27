@@ -1,3 +1,6 @@
+# This file was originally created by https://github.com/hamidrezavalidi/Political-Districting-to-Minimize-Cut-Edges
+# Several functions / objectives were added here
+
 import gurobipy as gp
 from gurobipy import GRB
 import scipy.stats as stats

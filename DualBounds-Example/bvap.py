@@ -25,27 +25,27 @@ def add_bvap_vap(m, G, k, U, bounds = None, comparison = False, bvap_ordering = 
         # vap = voting age population in district j
         # Option to add specific bounds rather than a more general bound
     if bounds == None:
-        vap = {j : m.addVar(name = f"vap{j}", ub = U)   for j in range(k)} 
-        bvap = {j : m.addVar(name = f"bvap{j}", ub = U)  for j in range(k)} 
+        m._vap = {j : m.addVar(name = f"vap{j}", ub = U)   for j in range(k)} 
+        m._bvap = {j : m.addVar(name = f"bvap{j}", ub = U)  for j in range(k)} 
     else:
-        vap = {j : m.addVar(name = f"vap{j}", lb = bounds['vap']['lb'][j], ub = bounds['vap']['ub'][j])   for j in range(k)}
-        bvap = {j : m.addVar(name = f"bvap{j}", lb = bounds['bvap']['lb'][j], ub = bounds['bvap']['ub'][j]) for j in range(k)} 
+        m._vap = {j : m.addVar(name = f"vap{j}", lb = bounds['vap']['lb'][j], ub = bounds['vap']['ub'][j])   for j in range(k)}
+        m._bvap = {j : m.addVar(name = f"bvap{j}", lb = bounds['bvap']['lb'][j], ub = bounds['bvap']['ub'][j]) for j in range(k)} 
     
     
     ##  VOTING AGE POPULATION AND BVAP POPULATION
-    m.addConstrs(( sum(VAP[i]*m._X[i,j]    for i in G.nodes) ==  vap[j]   for j in range(k)  ), name="VAP_Block_j")
-    m.addConstrs(( sum(BVAP[i]*m._X[i,j]   for i in G.nodes) ==  bvap[j]  for j in range(k)  ), name="BVAP_Block_j")
+    m.addConstrs(( sum(VAP[i]*m._X[i,j]    for i in G.nodes) ==  m._vap[j]   for j in range(k)  ), name="VAP_Block_j")
+    m.addConstrs(( sum(BVAP[i]*m._X[i,j]   for i in G.nodes) ==  m._bvap[j]  for j in range(k)  ), name="BVAP_Block_j")
     
     # Natural comparison bounds on vap vs bvap
     if comparison:
-        m.addConstrs((  vap[j]  >=  bvap[j]  for j in range(k)  ), name="VAP_BVAP_compare_j")
+        m.addConstrs((  m._vap[j]  >=  m._bvap[j]  for j in range(k)  ), name="VAP_BVAP_compare_j")
     
     # Order bvap variables
     if bvap_ordering:
         print("Adding bvap ordering")
-        m.addConstrs( (bvap[j] <= bvap[j+1]  for j in range(k-1)), name='ordering_bvap' )
+        m.addConstrs( (m._bvap[j] <= m._bvap[j+1]  for j in range(k-1)), name='ordering_bvap' )
     
-    return BVAP, VAP, VAP_TOTAL, BVAP_TOTAL, vap, bvap    
+    return BVAP, VAP, VAP_TOTAL, BVAP_TOTAL, m._vap, m._bvap    
 
 def add_bvap_vap_continuous(m, G, k, U, bounds = None, comparison = False, bvap_ordering = False):
     '''
@@ -123,13 +123,15 @@ def add_bvap_bounds_objective(m, G, k, R,U,bounds,obj_order,index):
 
 
 ## Stepwise supporting functions
-def add_step_simple(m, cdf, delta, RATIO_BREAKPOINTS,CDF_VALUES, PWL_PARTS, k):
+def add_step_simple(m, vap, bvap, VAP_TOTAL, cdf, delta, RATIO_BREAKPOINTS,CDF_VALUES, PWL_PARTS, k):
     '''
     This function is applied to multiple stepwise objectives.
     It takes in information about the breakpoints of interest and the needed variables and implements the simple threshold constraints on the objective function.
     This version includes the constraints that order the delta variables within a district.
     This version also assumes that the breakpoints for each district are the same.
     '''
+
+    
     ## Decide value of cdf[j]
     ## We focus on the fact that the cdf is an increasing function
     ## We model  "if ratio <= RATIO_BREAKPOINT, then cdf <= CDF_VALUE@RATIO_BREAKPOINT"
@@ -187,10 +189,10 @@ def add_step_exp_objective(m, G, k, R,U, bounds = None):
     cdf = {j : m.addVar(lb = 0, ub = 1, name = f"cdf{j}")   for j in range(k)} # r = cdf(8.26 q - 3.271)
     delta = {j : {l : m.addVar(vtype = GRB.BINARY, name = f"cdf{j},{l}")  for l in range(PWL_PARTS+1)}  for j in range(k)}
     
-    add_step_simple(m, cdf, delta, RATIO_BREAKPOINTS,CDF_VALUES, PWL_PARTS, k)
+    add_step_simple(m, vap, bvap,  VAP_TOTAL, cdf, delta, RATIO_BREAKPOINTS,CDF_VALUES, PWL_PARTS, k)
     
     m.setObjective( sum(cdf[j] for j in range(k)), GRB.MAXIMIZE)
-    return (expErr, maxErr)
+    return maxErr#(expErr, maxErr)
 
 
 def add_step_max_objective(m, G, k, R,U, bounds = None):
@@ -202,16 +204,16 @@ def add_step_max_objective(m, G, k, R,U, bounds = None):
     inf = min(node_ratios)
     sup = max(node_ratios)
     
-    RATIO_BREAKPOINTS, PWL_PARTS, CDF_VALUES, maxErr =  calculate_breakpoints_max(inf, sup, R, hm.cdf_fun)
+    RATIO_BREAKPOINTS, PWL_PARTS, CDF_VALUES, maxErr =  hm.calculate_breakpoints_max(inf, sup, R, hm.cdf_fun)
     
     ## variables for modeling the objective function
     cdf = {j : m.addVar(lb = 0, ub = 1, name = f"cdf{j}")   for j in range(k)} 
     delta = {j : {l : m.addVar(vtype = GRB.BINARY, name = f"cdf{j},{l}")  for l in range(PWL_PARTS+1)}  for j in range(k)}
     
-    add_step_simple(m, cdf, delta, RATIO_BREAKPOINTS,CDF_VALUES, PWL_PARTS, k)
+    add_step_simple(m, vap, bvap,  VAP_TOTAL, cdf, delta, RATIO_BREAKPOINTS,CDF_VALUES, PWL_PARTS, k)
     
     m.setObjective( sum(cdf[j] for j in range(k)), GRB.MAXIMIZE)
-    return (expErr, maxErr)
+    return maxErr#(expErr, maxErr)
 
 def add_step_alt_objective(m, G, k, R, U):
     '''
@@ -459,24 +461,6 @@ def add_LogEPWL_objective_extra_bounds_great(m,G,k,L,U, bounds):
     '''
     # Add bvap and vap
     BVAP, VAP, VAP_TOTAL, BVAP_TOTAL, vap, bvap = add_bvap_vap(m, G, k, U, bounds = bounds, bvap_ordering = True)
-    
-    
-#     # Special to SC and testing if added inequalities help
-    # This is the gradient at the optimal solution
-#     grad_y = [1.97338363, 2.09482622, 2.60365293, 2.0817186, 2.78971841,
-#         5.67583369, 5.78411099]
-#     grad_z = [-0.34014631, -0.37274136, -0.52628305, -0.39175563, -0.61444055,
-#         -1.96069322, -2.03916219]
-    
-#     #m.addConstr(sum(bvap[i]*grad_y[i] + vap[i]*grad_z[i] for i in range(k)) <= 3.508319191561e+05)
-    
-#     #m.addConstr(sum(bvap[i]*grad_y[i] + vap[i]*grad_z[i] for i in range(k)) >= -1)
-    
-# #     m.addConstr(bvap[5] + bvap[6] - bvap[1] - bvap[2] <= 3.110470000000e+05)
-    
-# #     m.addConstr(bvap[5] + bvap[6] <= 4.899240000000e+05)
-    
-#     #m.addConstr(bvap[5] + bvap[6] <= 440101.0)
 
     # write out bounds in different variables for later usage
     vap_lb, vap_ub, bvap_lb, bvap_ub = bounds['vap']['lb'], bounds['vap']['ub'],bounds['bvap']['lb'],bounds['bvap']['ub']
@@ -617,331 +601,7 @@ def add_LogEPWL_objective_extra_bounds_great(m,G,k,L,U, bounds):
     # set objective
     m.setObjective(sum(cdf[d] for d in range(k)), sense=GRB.MAXIMIZE)    
 
-    
-    
-    ########################
-    ##Testing zone!!! Warning!!!!
-    ##########################
-    
-def add_bvap_bounds_objective_specific(m, G, k, R,U,bounds):
-    '''
-    function that is used to help generate strong bounds on the bvap and vap variables in specific directions.  
-    the bounds are then processed in the file "Observing bounds information.ipynb"
-    these bounds are stored in a json in the Validi/data/bounds folder
-    these bounds can then be used in any of the formulations to give tighter initial formulations
-    '''
-    # Add bvap and vap
-    BVAP, VAP, VAP_TOTAL, BVAP_TOTAL, vap, bvap = add_bvap_vap(m, G, k,U, bvap_ordering = True)
-    
-#     vap_soln = [629679.0, 537662.0, 595591.0, 583282.0, 631354.0, 517860.0, 519040.0]
-#     bvap_soln = [89262.0, 92355.0, 108679.0, 109767.0, 131180.0, 217520.0, 222581.0]
-        
-#     for i in range(k):
-#         vap[i].start = vap_soln[i]
-#         bvap[i].start = bvap_soln[i]
-        
-    # This is the gradient at the optimal solution
-#     grad_y =  [0.9149593490847809, 0.9484343671090407, 1.0689404979132817, 1.5925903150787732, 7.125188104882017, 7.902455077654087, 7.516019887922555]
-#     grad_z =  [-0.11399439185399933, -0.12428681772826153, -0.15062057974441573, -0.2608848992070474, -2.4613656459731397, -3.3957463981738267, -3.4575897522425074]
-    
-#     grad_y = [2.20315471, 2.71373119, 1.23641269, 1.23693611, 1.40893007, 7.62508915, 7.22024158]
-#     grad_z = [-0.4095767 , -0.54095092, -0.18866167, -0.18876948, -0.22697629, -3.37400066, -3.39496015]
-#     #307872
-    
-#     grad_y = [0.91495935, 0.94843437, 1.96055704, 6.10977987, 6.1282261 ,2.8990114 , 7.22024158]
-#     grad_z = [-0.11399439, -0.12428682, -0.35466984, -1.88180255, -1.88974174, -0.68361739, -3.39496015]
-    
-    grads= {
-  "grad_y" : [1.780259020443479, 0.9484343671090407, 2.8495740842012696, 1.292999110699523, 1.9382798004561101, 6.527936599154103, 6.832728028888543], "grad_z" : [-0.28620905582715855, -0.12428681772826153, -0.5819527794683302, -0.2020616494755157, -0.34812418522199096, -2.626647782670382, -3.291469140513365]
-    }
-    grad_y = grads["grad_y"]
-    grad_z = grads["grad_z"]
-    print("grad min again")
-    
-  
-    m.setObjective(sum(bvap[i]*grad_y[i] + vap[i]*grad_z[i] for i in range(k)), GRB.MINIMIZE)
-    #m.setObjective(sum(bvap[i]*grad_y[i] + vap[i]*grad_z[i] for i in range(k)), GRB.MAXIMIZE)
-    
-    
-    #.setObjective(bvap[5] + bvap[6] - bvap[1] - bvap[2] , GRB.MAXIMIZE)
-    
-    #rint("m.setObjective( vap[0] -44 bvap[0] , GRB.MAXIMIZE)")
-    #.setObjective( vap[4] - bvap[4], GRB.MAXIMIZE)
-    
-def add_LogEPWL_objective_extra_bounds(m,G,k,L,U, bounds):
-    '''
-    Modifying this version for a continuos optimization
-    '''
-    # write out bounds in different variables for later usage
-    vap_lb, vap_ub, bvap_lb, bvap_ub = bounds['vap']['lb'], bounds['vap']['ub'],bounds['bvap']['lb'],bounds['bvap']['ub']
-   
-    vap_soln = [629679.0, 537662.0, 595591.0, 583282.0, 631354.0, 517860.0, 519040.0]
-    bvap_soln = [89262.0, 92355.0, 108679.0, 109767.0, 131180.0, 217520.0, 222581.0]
-    
-    diff = 300000
-    #diff = 50000
-    run = 'Continuous'
-    #run = 'Integer'
-    if run == 'Integer':
-        #Creating improved bounds for integer optimization
-        print(vap_lb)
-#         vap_lb = {i:max(vap_lb[i], vap_soln[i] - diff) for i in range(k)}
-#         vap_lb = {i:min(vap_ub[i], vap_soln[i] + diff) for i in range(k)}
-#         bvap_lb = {i:max(bvap_lb[i], bvap_soln[i] - diff) for i in range(k)}
-#         bvap_ub = {i: min(bvap_ub[i], bvap_soln[i] + diff) for i in range(k)}
 
-#         print(vap_lb)
-
-#         bounds['vap']['lb'], bounds['vap']['ub'],bounds['bvap']['lb'],bounds['bvap']['ub'] = vap_lb, vap_ub, bvap_lb, bvap_ub
-
-#         # Add bvap and vap
-        BVAP, VAP, VAP_TOTAL, BVAP_TOTAL, vap, bvap = add_bvap_vap(m, G, k, U, bounds = bounds, bvap_ordering = True)
-
-
-    
-#     ## Special to SC and testing if added inequalities help
-    ## This is the gradient at the optimal solution
-#     grad_y = [1.97338363, 2.09482622, 2.60365293, 2.0817186, 2.78971841,
-#         5.67583369, 5.78411099]
-#     grad_z = [-0.34014631, -0.37274136, -0.52628305, -0.39175563, -0.61444055,
-#         -1.96069322, -2.03916219]
-    
-#     #m.addConstr(sum(bvap[i]*grad_y[i] + vap[i]*grad_z[i] for i in range(k)) <= 3.508319191561e+05)
-    
-#     #m.addConstr(sum(bvap[i]*grad_y[i] + vap[i]*grad_z[i] for i in range(k)) >= -1)
-    
-# #     m.addConstr(bvap[5] + bvap[6] - bvap[1] - bvap[2] <= 3.110470000000e+05)
-    
-# #     m.addConstr(bvap[5] + bvap[6] <= 4.899240000000e+05)
-    
-#     #m.addConstr(bvap[5] + bvap[6] <= 440101.0)
-
-    if run == 'Continuous':
-        print("Running Continuous Optimization")
-    ## Continuous Optimization
-        BVAP, VAP, VAP_TOTAL, BVAP_TOTAL, vap, bvap = add_bvap_vap_continuous(m, G, k, U, bounds = bounds, bvap_ordering = True)
-        vap_soln = [629679.0, 537662.0, 595591.0, 583282.0, 631354.0, 517860.0, 519040.0]
-        bvap_soln = [89262.0, 92355.0, 108679.0, 109767.0, 131180.0, 217520.0, 222581.0]
-        
-        for i in range(k):
-            vap[i].start = vap_soln[i]
-            bvap[i].start = bvap_soln[i]
-        print(f"testing continuous optimization with diff = {diff}")
-    if 1 ==1:
-#         vap_diff = m.addVars(range(k),vtype=GRB.CONTINUOUS, lb = -1000000)
-#         bvap_diff = m.addVars(range(k),vtype=GRB.CONTINUOUS, lb = -1000000)
-#         vap_abs = m.addVars(range(k),vtype=GRB.CONTINUOUS, lb = 0)
-#         bvap_abs = m.addVars(range(k),vtype=GRB.CONTINUOUS, lb = 0)
-
-#         m.addConstrs(vap_diff[d] == vap[d] - vap_soln[d] for d in range(k))
-#         m.addConstrs(bvap_diff[d] == bvap[d] - bvap_soln[d] for d in range(k))
-#         for d in range(k):
-#             m.addGenConstrAbs(vap_abs[d], vap_diff[d])
-#             m.addGenConstrAbs(bvap_abs[d], bvap_diff[d])
-
-        #m.addConstr(sum(vap_abs[i] + bvap_abs[i] for i in range(k)) >= diff)
-        
-        diff_lb = {6: 272073, 5: 286284.000, 0:368181, 4:306041}
-        diff_ub = {6: 474464, 5: 539950, 0:541226, 4: 534351}
- 
-        for d in diff_lb.keys():
-             m.addConstr(vap[d] - bvap[d] >= diff_lb[d])
-        for d in diff_ub.keys():
-            m.addConstr(vap[d] - bvap[d] <= diff_ub[d])
-            
-        #m.addConstr(vap[0] + vap[1] - bvap[0]-bvap[1] >= 742019.356)
-        
-        grad_cuts =  [{'grad_y': [0.9149593490847809, 0.9484343671090407, 1.0689404979132817, 1.5925903150787732, 7.125188104882017, 7.902455077654087, 7.516019887922555],
-                       'grad_z':[-0.11399439185399933, -0.12428681772826153, -0.15062057974441573, -0.2608848992070474, -2.4613656459731397, -3.3957463981738267, -3.4575897522425074],
-                       'lb': -2313652.20,
-                       'ub':  -678430.40}
-        ,
-                      {   "grad_y" : [2.2060136132825012, 2.6840515863433345, 1.2238160689931328, 1.2243333791430848, 1.4089300657407648, 7.551932508050117, 7.240332065065908], 
-                       "grad_z" : [-0.40952775218324733, -0.5320931406028715, -0.18571292959736116, -0.18581893088277796, -0.22697628561368813, -3.3644580840679494, -3.3999194990852466],
-                       'lb':  -1673553.0,
-                       'ub':   -246398.91},
-                    {         "grad_y" : [0.9149593490847809, 0.9484343671090448, 2.395960756090903, 4.33590628541923, 1.9764063155855602, 7.945762843200286, 7.639804700088963], "grad_z" : [-0.11399439185399933, -0.12428681772826228, -0.4835751522626703, -1.0967184329955204, -0.38384513684459215, -3.3123620461596435, -3.450259199916987],
-                       'lb':-1733877.8,    
-                     'ub':-2.211213243668e+05 +1},
-                      {         "grad_y" : [0.9149593490847809, 0.9484343671090407, 1.1014497427631256, 6.487051681447118, 6.505630853938244, 4.284866392318292, 7.489446929010048], "grad_z" : [-0.11399439185399933, -0.12428681772826153, -0.1568717082893362, -2.0816683444417214, -2.0901275202132714, -1.1733286049722493, -3.4575581019328387],
-                       'lb':-1721569.9,    
-                     'ub':-406243.07},
-                       {        
-                        "grad_y" : [1.780259020443479, 0.9484343671090407, 2.8495740842012696, 1.292999110699523, 1.9382798004561101, 6.527936599154103, 6.832728028888543], "grad_z" : [-0.28620905582715855, -0.12428681772826153, -0.5819527794683302, -0.2020616494755157, -0.34812418522199096, -2.626647782670382, -3.291469140513365],
-                       'lb':-1340954.2,    
-                     'ub':-1.067630696176e+05 +1}
-
-                     ]
-
-        print("grad min")
-        for gNum, grad_cut in enumerate(grad_cuts):
-            grad_y, grad_z, grad_lb, grad_ub = grad_cut['grad_y'], grad_cut['grad_z'], grad_cut['lb'], grad_cut['ub'] 
-            m.addConstr(sum(bvap[i]*grad_y[i] + vap[i]*grad_z[i] for i in range(k)) <= grad_ub, name = f"grad_cut_ub{gNum}")
-            m.addConstr(sum(bvap[i]*grad_y[i] + vap[i]*grad_z[i] for i in range(k)) >= grad_lb,name = f"grad_cut_lb{gNum}")
-        
-    
-    ## variables for modeling the objective function
-    cdf = {j : m.addVar(lb = 0, ub = 1, name = f"cdf{j}")   for j in range(k)} 
-    lam = {}#m.addVars(range(k),range(L), ['in','out'], name = 'lam')
-    delta = {}#m.addVars(range(k),range(nu), vtype = GRB.BINARY, name = 'delta')
-            
-            
-    import matplotlib.pyplot as plt
-    # add breakpoints specific to each district based on the ordering of bvap in each district.
-    for d in range(k): 
-        Rinner = math.sqrt(vap_lb[d]**2+bvap_lb[d]**2) # inner radius
-        Router = math.sqrt(vap_ub[d]**2+bvap_ub[d]**2) # outer radius
-
-        l = bvap_lb[d]/vap_ub[d]
-        u = bvap_ub[d]/vap_lb[d]
-
-        factor = Router/Rinner
-        step = (u-l)/L
-        
-        #myRatios = hm.calculate_breakpoints_max(l, u, L, hm.cdf_fun)[0]
-        #print(hm.calculate_breakpoints_max(l, u, L, hm.cdf_fun))
-        breakpoints  = hm.calculate_breakpoints_max_error(l, u, 0.01, hm.cdf_fun)
-        myRatios = breakpoints[0]
-        L = breakpoints[1]
-        maxErr = breakpoints[3]
-        
-        ### Some value values for SC
-        nu = math.ceil(math.log(L,2))
-        code = hm.generateGrayarr(nu)
-        S = hm.summation_sets(code, nu,L-1)
-        
-        #print(breakpoints)
-        #myRatios = np.arange(l, u, step).tolist()
-        
-        for j in ['in','out']:
-            for i in range(L):
-                lam[(d,i,j)] = m.addVar(name = f'lam{d,i,j}', lb = 0, ub = 1)
-        for q in range(nu):
-            delta[(d,q)] = m.addVar( vtype = GRB.BINARY, name = f'delta{d,q}')
-
-        # Convex combination multipliers sum to 1
-        m.addConstr(sum(lam[d,i,j] for j in ['in','out'] for i in range(L)) == 1)
-        
-        for q in range(nu):
-            m.addConstr(sum(lam[d,i,j] for j in ['in','out'] for i in S[q][1]) <= 1-delta[d,q])
-            m.addConstr(sum(lam[d,i,j] for j in ['in','out'] for i in S[q][0]) <= delta[d,q])
-        
-        #print("District ", d)
-        #print(myRatios)
-
-        B = [[math.sqrt(Rinner**2/(1+r**2)), math.sqrt(Rinner**2 - Rinner**2/(1+r**2))] for r in myRatios] # set of inner radius vertices
-        Binner = []
-        Bouter = []
-        #print(B)
-        
-        # Loop over each ratio in the list
-        for i in range(len(myRatios)):
-            r = myRatios[i]
-            x, y = B[i]
-
-            # Plot the points and the scaled points
-            plt.plot(x, y, 'bo')
-            plt.plot(factor*x, factor*y, 'bo')
-            plt.plot([x,factor*x], [y,factor*y], 'b')
-            
-            p1, p2 = hm.liang_barsky(x, y, factor*x, factor*y, vap_lb[d], vap_ub[d], bvap_lb[d], bvap_ub[d])
-            Binner.append(p1)
-            Bouter.append(p2)
-            #print(r,p1,p2)
-            plt.plot(p1[0],p1[1], 'ro')
-            plt.plot(p2[0], p2[1], 'ro')
-            plt.plot([p1[0],p2[0]], [p1[1],p2[1]], 'r')
-            
-            # Connect the points with lines
-            if i > 0:
-                x_prev, y_prev = B[i-1]
-                plt.plot([x_prev, x], [y_prev, y], 'b-')
-                plt.plot([factor*x_prev, factor*x], [factor*y_prev, factor*y], 'b-')
-
-        # Set axis labels and title
-        plt.xlabel(f'vap{d}')
-        plt.ylabel(f'bvap{d}')
-        plt.title(f'Plot of Points and Scaled Points for district {d}, L = {L}, maxErr = {maxErr}')
-        # Set the limits of the x and y axes
-        # Set the limits of the x and y axes
-        plt.xlim(min(vap_lb.values()), max(vap_ub.values()))
-        plt.ylim(min(bvap_lb.values()), max(bvap_ub.values()))
-
-        # Get the limits of the x and y axes
-        x0, x1 = plt.xlim()
-        y0, y1 = plt.ylim()
-
-        # Plot the box
-        plt.plot([x0, x1], [y0, y0], 'r--')
-        plt.plot([x1, x1], [y0, y1], 'r--')
-        plt.plot([x1, x0], [y1, y1], 'r--')
-        plt.plot([x0, x0], [y1, y0], 'r--')
-        
-       # Get the limits of the x and y axes
-        x0, x1 = vap_lb[d], vap_ub[d]
-        y0, y1 = bvap_lb[d], bvap_ub[d]
-
-        # Plot the box
-        plt.plot([x0, x1], [y0, y0], 'g--')
-        plt.plot([x1, x1], [y0, y1], 'g--')
-        plt.plot([x1, x0], [y1, y1], 'g--')
-        plt.plot([x0, x0], [y1, y0], 'g--')
-        
-        plt.xlim(vap_lb[0]*0.9, vap_ub[k-1]*1.05)
-        plt.ylim(bvap_lb[0]*0.6, bvap_ub[k-1]*1.05)
-        
-        print("Plot difference lines!")
-#         if d in diff_lb:
-#             # Define the lower and upper bounds on the domain
-#             Lb, Ub, a = vap_lb[0]*0.9, vap_ub[k-1]*1.05, diff_lb[d]
-
-#             # Define the slope of the line
-#             slope, y_intercept = 1, -a
-
-#             # Define the x and y values for the line
-#             x = np.linspace(Lb, Ub, 2)
-#             y = slope * x + y_intercept
-
-#             # Plot the line and the two points
-#             plt.plot(x, y, 'g', label='x - y = a')
-#         if d in diff_ub:
-#             # Define the lower and upper bounds on the domain
-#             Lb, Ub, a = vap_lb[0]*0.9, vap_ub[k-1]*1.05, diff_ub[d]
-
-#             # Define the slope of the line
-#             slope, y_intercept = 1, -a
-
-#             # Define the x and y values for the line
-#             x = np.linspace(Lb, Ub, 2)
-#             y = slope * x + y_intercept
-
-#             # Plot the line and the two points
-#             plt.plot(x, y, 'g', label='x - y = a')
-
-        
-        # Show the plot
-        plt.show()
-        
-        #print(Binner)
-        #print(Bouter)
-        
-        # uses rays intersecting the bounds
-        print("d = ", d, " L=", L)
-        m.addConstr(bvap[d] == sum(lam[d,i,'in']*Binner[i][1] for i in range(L)) + sum(lam[d,i,'out']*Bouter[i][1] for i in range(L)))
-        m.addConstr(vap[d] == sum(lam[d,i,'in']*Binner[i][0] for i in range(L)) + sum(lam[d,i,'out']*Bouter[i][0] for i in range(L)))
-        m.addConstr(cdf[d] == sum((lam[d,i,'in']+lam[d,i,'out'])*hm.calculate_black_rep(B[i][1]/B[i][0]) for i in range(L)))
-        
-        # old - uses full rays, even if they are far away from bounds.
-#         m.addConstr(bvap[d] == sum(lam[d,i,'in']*B[i][1] for i in range(L)) + sum(lam[d,i,'out']*B[i][1]*factor for i in range(L)))
-#         m.addConstr(vap[d] == sum(lam[d,i,'in']*B[i][0] for i in range(L)) + sum(lam[d,i,'out']*B[i][0]*factor for i in range(L)))
-#         m.addConstr(cdf[d] == sum((lam[d,i,'in']+lam[d,i,'out'])*hm.calculate_black_rep(B[i][1]/B[i][0]) for i in range(L)))
-
-    # set objective
-    m.setObjective(sum(cdf[d] for d in range(k)), sense=GRB.MAXIMIZE)
-   
- ######################
-    # End testing zone!
- ######################
 
 # BNPWL Forumulation
 def add_BNPWL_objective(m, G, K, R, U):

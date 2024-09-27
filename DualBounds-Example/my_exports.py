@@ -22,6 +22,7 @@ from summarize import *
 import networkx as nx
 import geopandas as gpd
 import time
+import pprint
 
 ################################################
 # Summarize computational results to csv file
@@ -210,7 +211,52 @@ def summarize_results(result, m, G, DG, k, fn, level, state, base, obj, start, e
     for name in list(result.keys()):
         if name not in my_fieldnames:
             my_fieldnames.append(name)
-    print(result)
+    #######################
+
+
+    def print_formatted_result(result):
+        """
+        Prints the 'result' dictionary in a nicely formatted way, focusing on the 'gradient_bounds' key.
+        Each element of the sub-dictionary under 'gradient_bounds' will be printed on a separate line.
+        The rest of the dictionary will be printed as usual.
+
+        Args:
+            result (dict): The result dictionary containing 'gradient_bounds' as one of the keys.
+        """
+        # Check if the key 'gradient_bounds' exists in the result dictionary
+        if 'gradient_bounds' in result:
+            print("\nFormatted Gradient Bounds:")
+            gradient_bounds = result['gradient_bounds']
+
+            # Iterate over each key-value pair in the gradient_bounds sub-dictionary
+            for key, sub_dict in gradient_bounds.items():
+                print(f"\nGradient Bound {key}:")
+                # Check if the sub_dict is also a dictionary
+                if isinstance(sub_dict, dict):
+                    # Print each item in the sub-dictionary on a new line
+                    for sub_key, value in sub_dict.items():
+                        print(f"  {sub_key}: {value}")
+                else:
+                    # If not a dictionary, print directly
+                    print(f"  {sub_dict}")
+        else:
+            print("\nThe 'gradient_bounds' key does not exist in the result dictionary.")
+
+        # Print the rest of the result dictionary, excluding 'gradient_bounds'
+        print("\nRest of the Result Dictionary:")
+        rest_of_result = {k: v for k, v in result.items() if k != 'gradient_bounds'}
+
+        # Pretty print the rest of the dictionary without 'sort_dicts'
+        pprint.pprint(rest_of_result)
+
+    # Example usage
+    # Assuming 'result' is your dictionary
+    print_formatted_result(result)
+
+
+    
+    
+    ########################
     print(f"Adding to csv {results_filename}")
     append_dict_as_row(results_filename,result,my_fieldnames)
     

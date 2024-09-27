@@ -1,0 +1,20 @@
+{
+    "AL_bvap_bounds_max_1": {
+        "state": "AL",
+        "level": "county",
+        "base": "labeling",
+        "obj": "bvap_bounds",
+        "R": 90,
+        "dist_bounds": false,
+        "tlimit": 10,
+        "fixing": false,
+        "contiguity": "lcut",
+        "symmetry": "default",
+        "extended": false,
+        "order": "B_decreasing",
+        "heuristic": true,
+        "lp": false,
+        "obj_order": "bvap_min",
+        "index": 6
+    }
+}

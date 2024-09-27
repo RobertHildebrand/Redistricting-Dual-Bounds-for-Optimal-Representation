@@ -5,6 +5,9 @@ We append their readme.md file below for details on how their code works.
 
 Their code was modified to add a number of new models for optimization to compute dual bounds for several problems in political and minority representation.  Please see Example.ipynb for a notebook demonstrating the usage of the code.   
 
+This code was run on 2018 MacBook Pro, and also a Windows Desktop.   See requirements.txt for the package versions that were used on the 2018 MacBook Pro.   This is probably compatible with other versions of these packages, but we make no such gaurantee.
+
+
 
 
 

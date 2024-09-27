@@ -1,0 +1,82 @@
+
+Gurobi 10.0.2 (mac64[x86]) logging started Thu Sep 26 23:10:24 2024
+
+Set parameter LogFile to value "../results_for_ExampleConfig-AL_step-max_bvap/AL-county-step-max-45.log"
+Gurobi Optimizer version 10.0.2 build v10.0.2rc0 (mac64[x86])
+
+CPU model: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
+Thread count: 6 physical cores, 12 logical processors, using up to 12 threads
+
+Optimize a model with 1054 rows, 1281 columns and 4599 nonzeros
+Model fingerprint: 0x9a6b9e8b
+Variable types: 21 continuous, 1260 integer (1260 binary)
+Coefficient statistics:
+  Matrix range     [6e-03, 4e+06]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 8e+05]
+  RHS range        [1e+00, 8e+05]
+
+Warning: Completing partial solution with 1193 unfixed non-continuous variables out of 1260
+User MIP start produced solution with objective 1.69459 (0.02s)
+Loaded user MIP start with objective 1.69459
+
+Presolve removed 70 rows and 21 columns
+Presolve time: 0.02s
+Presolved: 984 rows, 1260 columns, 4431 nonzeros
+Variable types: 7 continuous, 1253 integer (1239 binary)
+Root relaxation presolved: 984 rows, 1260 columns, 4431 nonzeros
+
+
+Use crossover to convert LP symmetric solution to basic solution...
+
+Root relaxation: objective 5.423006e+00, 651 iterations, 0.01 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    5.42301    0  229    1.69459    5.42301   220%     -    0s
+     0     0    4.50233    0  279    1.69459    4.50233   166%     -    0s
+     0     0    4.49365    0  285    1.69459    4.49365   165%     -    0s
+     0     0    4.48651    0  284    1.69459    4.48651   165%     -    0s
+     0     0    4.48271    0  282    1.69459    4.48271   165%     -    0s
+     0     0    4.48062    0  283    1.69459    4.48062   164%     -    0s
+     0     0    4.47871    0  285    1.69459    4.47871   164%     -    0s
+     0     0    4.47500    0  284    1.69459    4.47500   164%     -    0s
+     0     0    4.47389    0  289    1.69459    4.47389   164%     -    0s
+     0     0    4.47131    0  286    1.69459    4.47131   164%     -    0s
+     0     0    4.47103    0  287    1.69459    4.47103   164%     -    0s
+     0     0    4.11544    0  276    1.69459    4.11544   143%     -    0s
+     0     0    4.04804    0  253    1.69459    4.04804   139%     -    0s
+     0     0    4.02415    0  277    1.69459    4.02415   137%     -    0s
+     0     0    4.01493    0  289    1.69459    4.01493   137%     -    0s
+     0     0    4.01023    0  292    1.69459    4.01023   137%     -    0s
+     0     0    4.00756    0  283    1.69459    4.00756   136%     -    0s
+     0     0    4.00671    0  287    1.69459    4.00671   136%     -    0s
+     0     0    4.00481    0  286    1.69459    4.00481   136%     -    0s
+     0     0    4.00376    0  283    1.69459    4.00376   136%     -    0s
+     0     0    4.00348    0  284    1.69459    4.00348   136%     -    0s
+     0     0    3.83394    0  283    1.69459    3.83394   126%     -    0s
+     0     0    3.81856    0  285    1.69459    3.81856   125%     -    0s
+     0     0    3.81148    0  287    1.69459    3.81148   125%     -    0s
+     0     0    3.81098    0  287    1.69459    3.81098   125%     -    0s
+     0     0    3.80816    0  287    1.69459    3.80816   125%     -    0s
+     0     0    3.80779    0  288    1.69459    3.80779   125%     -    0s
+     0     0    3.73924    0  278    1.69459    3.73924   121%     -    0s
+     0     0          -    0         1.69459    3.73924   121%     -    1s
+
+Cutting planes:
+  Implied bound: 19
+  MIR: 81
+  RLT: 12
+  Relax-and-lift: 67
+
+Explored 1 nodes (10697 simplex iterations) in 1.01 seconds (0.70 work units)
+Thread count was 12 (of 12 available processors)
+
+Solution count 1: 1.69459 
+
+Time limit reached
+Best objective 1.694586061452e+00, best bound 3.739242108720e+00, gap 120.6581%
+
+User-callback calls 496, time in user-callback 0.02 sec
+Warning: constraint name "vertex to district[0]" has a space
