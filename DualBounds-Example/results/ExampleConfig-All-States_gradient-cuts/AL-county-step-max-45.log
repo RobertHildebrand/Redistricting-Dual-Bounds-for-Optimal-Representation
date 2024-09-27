@@ -1,0 +1,208 @@
+
+Gurobi 10.0.2 (mac64[x86]) logging started Fri Sep 27 10:33:40 2024
+
+Set parameter LogFile to value "results/ExampleConfig-All-States_gradient-cuts/AL-county-step-max-45.log"
+Set parameter TimeLimit to value 30
+
+Gurobi 10.0.2 (mac64[x86]) logging started Fri Sep 27 10:33:40 2024
+
+Set parameter LogFile to value "results/ExampleConfig-All-States_gradient-cuts/AL-county-step-max-45.log"
+Set parameter TimeLimit to value 30
+Gurobi Optimizer version 10.0.2 build v10.0.2rc0 (mac64[x86])
+
+CPU model: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
+Thread count: 6 physical cores, 12 logical processors, using up to 12 threads
+
+Optimize a model with 431 rows, 1644 columns and 11538 nonzeros
+Model fingerprint: 0xdf638a69
+Variable types: 665 continuous, 979 integer (979 binary)
+Coefficient statistics:
+  Matrix range     [4e-03, 7e+05]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 6e+05]
+  RHS range        [1e+00, 3e+07]
+
+Warning: Completing partial solution with 912 unfixed non-continuous variables out of 979
+User MIP start produced solution with objective 1.58917 (0.16s)
+User MIP start produced solution with objective 1.58917 (0.16s)
+Loaded user MIP start with objective 1.58917
+
+Presolve removed 110 rows and 4 columns
+Presolve time: 0.02s
+Presolved: 321 rows, 1640 columns, 10019 nonzeros
+Variable types: 651 continuous, 989 integer (975 binary)
+Root relaxation presolved: 316 rows, 1645 columns, 9746 nonzeros
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Root barrier log...
+
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA' NZ     : 1.222e+04
+ Factor NZ  : 1.408e+04 (roughly 1 MB of memory)
+ Factor Ops : 1.113e+06 (less than 1 second per iteration)
+ Threads    : 1
+
+Barrier performed 0 iterations in 0.22 seconds (0.12 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with primal simplex
+
+Root relaxation: objective 2.196081e+00, 580 iterations, 0.04 seconds (0.01 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    2.19608    0   53    1.58917    2.19608  38.2%     -    0s
+     0     0    2.19487    0   59    1.58917    2.19487  38.1%     -    0s
+     0     0    2.19487    0   61    1.58917    2.19487  38.1%     -    0s
+     0     0    2.19476    0   66    1.58917    2.19476  38.1%     -    0s
+     0     0    2.19469    0   69    1.58917    2.19469  38.1%     -    0s
+     0     0    2.19466    0   68    1.58917    2.19466  38.1%     -    0s
+     0     0    2.19451    0   74    1.58917    2.19451  38.1%     -    0s
+     0     0    2.19451    0   86    1.58917    2.19451  38.1%     -    0s
+     0     0    2.19437    0   84    1.58917    2.19437  38.1%     -    0s
+     0     0    2.19437    0   92    1.58917    2.19437  38.1%     -    0s
+     0     0    2.19437    0   72    1.58917    2.19437  38.1%     -    0s
+     0     0    2.19437    0   79    1.58917    2.19437  38.1%     -    0s
+     0     0    2.19437    0   74    1.58917    2.19437  38.1%     -    0s
+     0     0    2.19437    0   67    1.58917    2.19437  38.1%     -    0s
+     0     0    2.19437    0   74    1.58917    2.19437  38.1%     -    0s
+     0     0    2.19435    0   82    1.58917    2.19435  38.1%     -    1s
+     0     0    2.19435    0   79    1.58917    2.19435  38.1%     -    1s
+     0     0    2.19435    0   81    1.58917    2.19435  38.1%     -    1s
+     0     0    2.19435    0   66    1.58917    2.19435  38.1%     -    1s
+     0     2    2.19435    0   63    1.58917    2.19435  38.1%     -    1s
+  4214  2285    1.64137  141   17    1.58917    2.14700  35.1%  36.5    5s
+H 4221  2285                       1.5891686    2.14700  35.1%  36.5    5s
+ 17344 10744 infeasible   28         1.58917    1.89587  19.3%  33.2   10s
+ 38624 26452    1.72806   29   54    1.58917    1.79133  12.7%  29.4   15s
+ 52894 35374    1.62482  106   27    1.58917    1.76268  10.9%  28.5   20s
+ 65175 43777 infeasible   50         1.58917    1.73697  9.30%  29.3   25s
+ 77166 52106     cutoff   29         1.58917    1.72205  8.36%  29.7   30s
+
+Cutting planes:
+  Lazy constraints: 220
+
+Explored 78195 nodes (2318570 simplex iterations) in 30.03 seconds (25.46 work units)
+Thread count was 12 (of 12 available processors)
+
+Solution count 1: 1.58917 
+
+Time limit reached
+Best objective 1.589168591115e+00, best bound 1.721133653141e+00, gap 8.3040%
+
+User-callback calls 164454, time in user-callback 1.11 sec
+Warning: variable name "lam(0, 0, 'in')" has a space
+Warning: constraint name "vertex to district[0]" has a space
+Warning: to let Gurobi read it back, use rlp format
+Warning: variable name "lam(0, 0, 'in')" has a space
+Warning: default variable names used to write solution file
+
+Gurobi 10.0.2 (mac64[x86]) logging started Fri Sep 27 11:04:22 2024
+
+Set parameter LogFile to value "results/ExampleConfig-All-States_gradient-cuts/AL-county-step-max-45.log"
+Set parameter TimeLimit to value 30
+
+Gurobi 10.0.2 (mac64[x86]) logging started Fri Sep 27 11:04:22 2024
+
+Set parameter LogFile to value "results/ExampleConfig-All-States_gradient-cuts/AL-county-step-max-45.log"
+Set parameter TimeLimit to value 30
+Gurobi Optimizer version 10.0.2 build v10.0.2rc0 (mac64[x86])
+
+CPU model: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
+Thread count: 6 physical cores, 12 logical processors, using up to 12 threads
+
+Optimize a model with 431 rows, 1644 columns and 11538 nonzeros
+Model fingerprint: 0xdf638a69
+Variable types: 665 continuous, 979 integer (979 binary)
+Coefficient statistics:
+  Matrix range     [4e-03, 7e+05]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 6e+05]
+  RHS range        [1e+00, 3e+07]
+
+Warning: Completing partial solution with 912 unfixed non-continuous variables out of 979
+User MIP start produced solution with objective 1.58917 (0.15s)
+User MIP start produced solution with objective 1.58917 (0.15s)
+Loaded user MIP start with objective 1.58917
+
+Presolve removed 110 rows and 4 columns
+Presolve time: 0.01s
+Presolved: 321 rows, 1640 columns, 10019 nonzeros
+Variable types: 651 continuous, 989 integer (975 binary)
+Root relaxation presolved: 316 rows, 1645 columns, 9746 nonzeros
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Root barrier log...
+
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA' NZ     : 1.222e+04
+ Factor NZ  : 1.408e+04 (roughly 1 MB of memory)
+ Factor Ops : 1.113e+06 (less than 1 second per iteration)
+ Threads    : 1
+
+Barrier performed 0 iterations in 0.20 seconds (0.12 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with primal simplex
+
+Root relaxation: objective 2.196081e+00, 580 iterations, 0.03 seconds (0.01 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    2.19608    0   53    1.58917    2.19608  38.2%     -    0s
+     0     0    2.19487    0   59    1.58917    2.19487  38.1%     -    0s
+     0     0    2.19487    0   61    1.58917    2.19487  38.1%     -    0s
+     0     0    2.19476    0   66    1.58917    2.19476  38.1%     -    0s
+     0     0    2.19469    0   69    1.58917    2.19469  38.1%     -    0s
+     0     0    2.19466    0   68    1.58917    2.19466  38.1%     -    0s
+     0     0    2.19451    0   74    1.58917    2.19451  38.1%     -    0s
+     0     0    2.19451    0   86    1.58917    2.19451  38.1%     -    0s
+     0     0    2.19437    0   84    1.58917    2.19437  38.1%     -    0s
+     0     0    2.19437    0   92    1.58917    2.19437  38.1%     -    0s
+     0     0    2.19437    0   72    1.58917    2.19437  38.1%     -    0s
+     0     0    2.19437    0   79    1.58917    2.19437  38.1%     -    0s
+     0     0    2.19437    0   74    1.58917    2.19437  38.1%     -    0s
+     0     0    2.19437    0   67    1.58917    2.19437  38.1%     -    0s
+     0     0    2.19437    0   74    1.58917    2.19437  38.1%     -    0s
+     0     0    2.19435    0   82    1.58917    2.19435  38.1%     -    1s
+     0     0    2.19435    0   79    1.58917    2.19435  38.1%     -    1s
+     0     0    2.19435    0   81    1.58917    2.19435  38.1%     -    1s
+     0     0    2.19435    0   66    1.58917    2.19435  38.1%     -    1s
+     0     2    2.19435    0   63    1.58917    2.19435  38.1%     -    1s
+  3973  2293 infeasible  126         1.58917    2.14700  35.1%  37.2    5s
+H 4221  2285                       1.5891686    2.14700  35.1%  36.5    5s
+ 17344 10744 infeasible   28         1.58917    1.89587  19.3%  33.2   10s
+ 35849 24398    1.59545   57   43    1.58917    1.79779  13.1%  29.5   15s
+ 50468 34538    1.62361   92   39    1.58917    1.76551  11.1%  28.7   20s
+ 62528 42320    1.61542   70   24    1.58917    1.73977  9.48%  29.4   25s
+ 75935 50728    1.70445   33   48    1.58917    1.72334  8.44%  29.7   30s
+
+Cutting planes:
+  Lazy constraints: 220
+
+Explored 76324 nodes (2268836 simplex iterations) in 30.02 seconds (24.93 work units)
+Thread count was 12 (of 12 available processors)
+
+Solution count 1: 1.58917 
+
+Time limit reached
+Best objective 1.589168591115e+00, best bound 1.723341502121e+00, gap 8.4430%
+
+User-callback calls 160734, time in user-callback 1.12 sec
+Warning: variable name "lam(0, 0, 'in')" has a space
+Warning: constraint name "vertex to district[0]" has a space
+Warning: to let Gurobi read it back, use rlp format
+Warning: variable name "lam(0, 0, 'in')" has a space
+Warning: default variable names used to write solution file

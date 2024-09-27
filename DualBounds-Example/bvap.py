@@ -604,12 +604,12 @@ def add_LogEPWL_objective_extra_bounds_great(m,G,k,L,U, bounds):
 
 
 # BNPWL Forumulation
-def add_BNPWL_objective(m, G, K, R, U):
+def add_BNPWL_objective(m, G, K, R, U, bounds = None):
     '''
     
     '''
     # Add bvap and vap
-    BVAP, VAP, VAP_TOTAL, BVAP_TOTAL, vap, bvap = add_bvap_vap(m, G, k, U)
+    BVAP, VAP, VAP_TOTAL, BVAP_TOTAL, vap, bvap = add_bvap_vap(m, G, K, U)
     
     BIGNORM = math.sqrt(BVAP_TOTAL**2+U**2)
     node_norms = [math.sqrt(BVAP[i]**2+VAP[i]**2)  for i in G.nodes]
@@ -633,7 +633,7 @@ def add_BNPWL_objective(m, G, K, R, U):
         j = 2**nu - i - 1
         value1 = math.cos( (j+1) * (math.pi) / n )
         value2 = math.sin( (j+1) * (math.pi) / n )
-        return f_bvap(value2/value1)
+        return hm.f_bvap(value2/value1)
     
     '''
     Input:  coordinates y_value,z_value >= 0, 

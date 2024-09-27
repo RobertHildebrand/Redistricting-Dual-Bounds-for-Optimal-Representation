@@ -1,0 +1,2 @@
+run,state,level,base,obj,R,tlimit,fixing,contiguity,symmetry,extended,order,heuristic,lp,k,L,U,n,m,heur_obj,heur_time,heur_iter,B_q,B_size,B_time,B_timelimit,DFixings,LFixings,UFixings_X,UFixings_R,ZFixings,LP_obj,LP_time,MIP_obj,MIP_bound,MIP_time,MIP_timelimit,MIP_status,MIP_nodes,callbacks,lazy_cuts,connected,dist_bounds,expected_error,maximum_error
+AL_BNPWL_bvap,AL,county,labeling,BNPWL,5,1,False,lcut,none,False,bvap,True,False,7,645979,789529,67,171,n/a,n/a,n/a,,,,,0,0,0,0,0,n/a,n/a,1.6223239479886173,5.28189316846983,1.03,1,9,1,3,0,True,False,,,0,10,False,0

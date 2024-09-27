@@ -1,0 +1,326 @@
+{
+    "nodes": [
+        {
+            "name": "Oconee",
+            "index": 7,
+            "GEOID20": "45073",
+            "GEOID": "0500000US45073",
+            "district": 0
+        },
+        {
+            "name": "Laurens",
+            "index": 38,
+            "GEOID20": "45059",
+            "GEOID": "0500000US45059",
+            "district": 0
+        },
+        {
+            "name": "Pickens",
+            "index": 43,
+            "GEOID20": "45077",
+            "GEOID": "0500000US45077",
+            "district": 0
+        },
+        {
+            "name": "Greenville",
+            "index": 45,
+            "GEOID20": "45045",
+            "GEOID": "0500000US45045",
+            "district": 0
+        },
+        {
+            "name": "Horry",
+            "index": 11,
+            "GEOID20": "45051",
+            "GEOID": "0500000US45051",
+            "district": 1
+        },
+        {
+            "name": "Dillon",
+            "index": 18,
+            "GEOID20": "45033",
+            "GEOID": "0500000US45033",
+            "district": 1
+        },
+        {
+            "name": "Georgetown",
+            "index": 26,
+            "GEOID20": "45043",
+            "GEOID": "0500000US45043",
+            "district": 1
+        },
+        {
+            "name": "Berkeley",
+            "index": 32,
+            "GEOID20": "45015",
+            "GEOID": "0500000US45015",
+            "district": 1
+        },
+        {
+            "name": "Edgefield",
+            "index": 6,
+            "GEOID20": "45037",
+            "GEOID": "0500000US45037",
+            "district": 2
+        },
+        {
+            "name": "Abbeville",
+            "index": 10,
+            "GEOID20": "45001",
+            "GEOID": "0500000US45001",
+            "district": 2
+        },
+        {
+            "name": "McCormick",
+            "index": 20,
+            "GEOID20": "45065",
+            "GEOID": "0500000US45065",
+            "district": 2
+        },
+        {
+            "name": "Barnwell",
+            "index": 25,
+            "GEOID20": "45011",
+            "GEOID": "0500000US45011",
+            "district": 2
+        },
+        {
+            "name": "Saluda",
+            "index": 29,
+            "GEOID20": "45081",
+            "GEOID": "0500000US45081",
+            "district": 2
+        },
+        {
+            "name": "Aiken",
+            "index": 37,
+            "GEOID20": "45003",
+            "GEOID": "0500000US45003",
+            "district": 2
+        },
+        {
+            "name": "Lexington",
+            "index": 40,
+            "GEOID20": "45063",
+            "GEOID": "0500000US45063",
+            "district": 2
+        },
+        {
+            "name": "Anderson",
+            "index": 41,
+            "GEOID20": "45007",
+            "GEOID": "0500000US45007",
+            "district": 2
+        },
+        {
+            "name": "Spartanburg",
+            "index": 3,
+            "GEOID20": "45083",
+            "GEOID": "0500000US45083",
+            "district": 3
+        },
+        {
+            "name": "Cherokee",
+            "index": 12,
+            "GEOID20": "45021",
+            "GEOID": "0500000US45021",
+            "district": 3
+        },
+        {
+            "name": "Lancaster",
+            "index": 13,
+            "GEOID20": "45057",
+            "GEOID": "0500000US45057",
+            "district": 3
+        },
+        {
+            "name": "York",
+            "index": 24,
+            "GEOID20": "45091",
+            "GEOID": "0500000US45091",
+            "district": 3
+        },
+        {
+            "name": "Charleston",
+            "index": 5,
+            "GEOID20": "45019",
+            "GEOID": "0500000US45019",
+            "district": 4
+        },
+        {
+            "name": "Colleton",
+            "index": 8,
+            "GEOID20": "45029",
+            "GEOID": "0500000US45029",
+            "district": 4
+        },
+        {
+            "name": "Dorchester",
+            "index": 31,
+            "GEOID20": "45035",
+            "GEOID": "0500000US45035",
+            "district": 4
+        },
+        {
+            "name": "Beaufort",
+            "index": 42,
+            "GEOID20": "45013",
+            "GEOID": "0500000US45013",
+            "district": 4
+        },
+        {
+            "name": "Sumter",
+            "index": 1,
+            "GEOID20": "45085",
+            "GEOID": "0500000US45085",
+            "district": 5
+        },
+        {
+            "name": "Lee",
+            "index": 15,
+            "GEOID20": "45061",
+            "GEOID": "0500000US45061",
+            "district": 5
+        },
+        {
+            "name": "Richland",
+            "index": 22,
+            "GEOID20": "45079",
+            "GEOID": "0500000US45079",
+            "district": 5
+        },
+        {
+            "name": "Calhoun",
+            "index": 23,
+            "GEOID20": "45017",
+            "GEOID": "0500000US45017",
+            "district": 5
+        },
+        {
+            "name": "Greenwood",
+            "index": 33,
+            "GEOID20": "45047",
+            "GEOID": "0500000US45047",
+            "district": 5
+        },
+        {
+            "name": "Newberry",
+            "index": 39,
+            "GEOID20": "45071",
+            "GEOID": "0500000US45071",
+            "district": 5
+        },
+        {
+            "name": "Florence",
+            "index": 0,
+            "GEOID20": "45041",
+            "GEOID": "0500000US45041",
+            "district": 6
+        },
+        {
+            "name": "Orangeburg",
+            "index": 2,
+            "GEOID20": "45075",
+            "GEOID": "0500000US45075",
+            "district": 6
+        },
+        {
+            "name": "Marion",
+            "index": 4,
+            "GEOID20": "45067",
+            "GEOID": "0500000US45067",
+            "district": 6
+        },
+        {
+            "name": "Hampton",
+            "index": 9,
+            "GEOID20": "45049",
+            "GEOID": "0500000US45049",
+            "district": 6
+        },
+        {
+            "name": "Allendale",
+            "index": 14,
+            "GEOID20": "45005",
+            "GEOID": "0500000US45005",
+            "district": 6
+        },
+        {
+            "name": "Clarendon",
+            "index": 16,
+            "GEOID20": "45027",
+            "GEOID": "0500000US45027",
+            "district": 6
+        },
+        {
+            "name": "Fairfield",
+            "index": 17,
+            "GEOID20": "45039",
+            "GEOID": "0500000US45039",
+            "district": 6
+        },
+        {
+            "name": "Jasper",
+            "index": 19,
+            "GEOID20": "45053",
+            "GEOID": "0500000US45053",
+            "district": 6
+        },
+        {
+            "name": "Union",
+            "index": 21,
+            "GEOID20": "45087",
+            "GEOID": "0500000US45087",
+            "district": 6
+        },
+        {
+            "name": "Chesterfield",
+            "index": 27,
+            "GEOID20": "45025",
+            "GEOID": "0500000US45025",
+            "district": 6
+        },
+        {
+            "name": "Chester",
+            "index": 28,
+            "GEOID20": "45023",
+            "GEOID": "0500000US45023",
+            "district": 6
+        },
+        {
+            "name": "Williamsburg",
+            "index": 30,
+            "GEOID20": "45089",
+            "GEOID": "0500000US45089",
+            "district": 6
+        },
+        {
+            "name": "Marlboro",
+            "index": 34,
+            "GEOID20": "45069",
+            "GEOID": "0500000US45069",
+            "district": 6
+        },
+        {
+            "name": "Bamberg",
+            "index": 35,
+            "GEOID20": "45009",
+            "GEOID": "0500000US45009",
+            "district": 6
+        },
+        {
+            "name": "Darlington",
+            "index": 36,
+            "GEOID20": "45031",
+            "GEOID": "0500000US45031",
+            "district": 6
+        },
+        {
+            "name": "Kershaw",
+            "index": 44,
+            "GEOID20": "45055",
+            "GEOID": "0500000US45055",
+            "district": 6
+        }
+    ]
+}

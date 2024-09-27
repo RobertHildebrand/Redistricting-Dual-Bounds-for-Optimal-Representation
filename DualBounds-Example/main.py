@@ -93,14 +93,14 @@ def main(config_path, summarize_and_export_results = True, return_bvap_vap_soln_
     ###############################################
 
     # create directory for results
-    path = os.path.join("..", "results_for_" + config_filename_wo_extension) 
+    path = os.path.join("results", "results_for_" + config_filename_wo_extension) 
     if not os.path.exists(path):
         os.mkdir(path) 
 
     # print results to csv file
     today = date.today()
     today_string = today.strftime("%Y_%b_%d") # Year_Month_Day, like 2019_Sept_16
-    results_filename = "../results_for_" + config_filename_wo_extension + "/results_" + config_filename_wo_extension + "_" + today_string + ".csv" 
+    results_filename = "results/results_for_" + config_filename_wo_extension + "/results_" + config_filename_wo_extension + "_" + today_string + ".csv" 
 
     # Check if the file already exists
     if os.path.isfile(results_filename):
@@ -457,8 +457,12 @@ def main(config_path, summarize_and_export_results = True, return_bvap_vap_soln_
         result['MIP_timelimit'] = config['tlimit'] 
         m.Params.TimeLimit = result['MIP_timelimit']
         m.Params.Method = 3 # use concurrent method for root LP. Useful for degenerate models
+        fn = f"results/{config_filename_wo_extension}/{result['state']}-{result['level']}-{config['obj']}-{config['R']}"
+        # Ensure the directory exists
+        log_dir = os.path.dirname(fn)  # Extract directory path from the file name
+        os.makedirs(log_dir, exist_ok=True)  # Create the directory if it does not exist
 
-        fn = "../" + "results_for_" + config_filename_wo_extension + "/" + result['state'] + "-" + result['level'] + "-" + config['obj'] + "-" + str(config['R'])
+        #fn = "results/" + "results_for_" + config_filename_wo_extension + "/" + result['state'] + "-" + result['level'] + "-" + config['obj'] + "-" + str(config['R'])
         m.params.LogFile= fn+".log"
 
         #m.setParam('LogToConsole', 0)
@@ -471,10 +475,9 @@ def main(config_path, summarize_and_export_results = True, return_bvap_vap_soln_
         # Summarize and export results including plotting
         ####################################  
         
-        
         if summarize_and_export_results:
-            print(fn)
-
+            fn = f"results/{config_filename_wo_extension}/{result['state']}-{result['level']}-{config['obj']}-{config['R']}"
+            
             if obj == "bvap_bounds":
                 fn = fn + "_" + obj_order + "_" + str(index)
 
@@ -486,6 +489,23 @@ def main(config_path, summarize_and_export_results = True, return_bvap_vap_soln_
             else:
                 # Call the function without expErr and maxErr
                 summarize_results(result, m, G, DG, k, fn, level, state, base, obj, start, end, results_filename=results_filename, my_fieldnames=my_fieldnames)
+                
+                
+                
+#         if summarize_and_export_results:
+#             print(fn)
+
+#             if obj == "bvap_bounds":
+#                 fn = fn + "_" + obj_order + "_" + str(index)
+
+#             # Check if expErr and maxErr are defined
+#             print("Summarizing the results for export")
+#             if 'expErr' in locals() and 'maxErr' in locals():
+#                 # Call the function with expErr and maxErr
+#                 summarize_results(result, m, G, DG, k, fn, level, state, base, obj, start, end, expErr=expErr, maxErr=maxErr, results_filename=results_filename, my_fieldnames=my_fieldnames)
+#             else:
+#                 # Call the function without expErr and maxErr
+#                 summarize_results(result, m, G, DG, k, fn, level, state, base, obj, start, end, results_filename=results_filename, my_fieldnames=my_fieldnames)
         
         
         ####################################   
@@ -510,28 +530,6 @@ def main(config_path, summarize_and_export_results = True, return_bvap_vap_soln_
                 result['vap'] = {i: m.getVarByName(f'vap{i}').x for i in range(k)}
             return result
         
-        
-#         vap_soln = [629679.0, 537662.0, 595591.0, 583282.0, 631354.0, 517860.0, 519040.0]
-#         bvap_soln = [89262.0, 92355.0, 108679.0, 109767.0, 131180.0, 217520.0, 222581.0]
-#         import helper_methods as hm
-#         import numpy as np
-#         vap_values = [m.getVarByName(f'vap{i}').x for i in range(7)]
-#         bvap_values =  [m.getVarByName(f'bvap{i}').x for i in range(7)]
-#         print("vap_value = ",vap_values)
-#         print("bvap_value = ",bvap_values)
-#         grad_y, grad_z = hm.grad_bvap(bvap_values, vap_values)
-#         grad_y =list(np.array(grad_y)*10**7)
-#         grad_z = list(np.array(grad_z)*10**7)
-#         print(f" \"grad_y\" : {grad_y}, \"grad_z\" : {grad_z}")
-#         print("Soln val: ", sum(bvap_values[i]*grad_y[i] + vap_values[i]*grad_z[i] for i in range(k)))
-#         print("Warm start val: ", sum(bvap_soln[i]*grad_y[i] + vap_soln[i]*grad_z[i] for i in range(k)))
-#         print("ratios", [m.getVarByName(f'bvap{i}').x/m.getVarByName(f'vap{i}').x for i in range(7)])
-        
-#         vap_difference = [m.getVarByName(f'vap{i}').x - vap_soln[i] for i in range(7)]
-#         bvap_difference = [m.getVarByName(f'bvap{i}').x - bvap_soln[i] for i in range(7)]
-#         print("vap difference", vap_difference)
-#         print("bvap difference", bvap_difference)
-#         print("ratios", [m.getVarByName(f'bvap{i}').x/m.getVarByName(f'vap{i}').x for i in range(7)])
         print("func", [hm.f_bvap(m.getVarByName(f'bvap{i}').x/m.getVarByName(f'vap{i}').x) for i in range(7)])
         #print("cdf", [m.getVarByName(f'cdf{i}').x for i in range(7)])   
     return result

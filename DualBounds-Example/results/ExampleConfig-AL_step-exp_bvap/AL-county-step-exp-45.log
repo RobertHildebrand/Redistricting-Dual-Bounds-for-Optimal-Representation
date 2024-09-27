@@ -1,0 +1,93 @@
+
+Gurobi 10.0.2 (mac64[x86]) logging started Fri Sep 27 11:03:59 2024
+
+Set parameter LogFile to value "results/ExampleConfig-AL_step-exp_bvap/AL-county-step-exp-45.log"
+Gurobi Optimizer version 10.0.2 build v10.0.2rc0 (mac64[x86])
+
+CPU model: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
+Thread count: 6 physical cores, 12 logical processors, using up to 12 threads
+
+Optimize a model with 1054 rows, 1281 columns and 4599 nonzeros
+Model fingerprint: 0x08549e29
+Variable types: 21 continuous, 1260 integer (1260 binary)
+Coefficient statistics:
+  Matrix range     [6e-03, 4e+06]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 8e+05]
+  RHS range        [1e+00, 8e+05]
+
+Warning: Completing partial solution with 1193 unfixed non-continuous variables out of 1260
+User MIP start produced solution with objective 2.10171 (0.01s)
+Loaded user MIP start with objective 2.10171
+
+Presolve removed 826 rows and 273 columns
+Presolve time: 0.02s
+Presolved: 228 rows, 1008 columns, 2667 nonzeros
+Variable types: 7 continuous, 1001 integer (987 binary)
+Root relaxation presolved: 228 rows, 1008 columns, 2667 nonzeros
+
+
+Use crossover to convert LP symmetric solution to basic solution...
+
+Root relaxation: objective 5.484808e+00, 474 iterations, 0.01 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    5.48481    0   40    2.10171    5.48481   161%     -    0s
+     0     0    4.86763    0   61    2.10171    4.86763   132%     -    0s
+     0     0    4.73225    0   66    2.10171    4.73225   125%     -    0s
+     0     0    4.71270    0   65    2.10171    4.71270   124%     -    0s
+     0     0    4.71052    0   65    2.10171    4.71052   124%     -    0s
+     0     0    4.38427    0   69    2.10171    4.38427   109%     -    0s
+     0     0    4.33325    0   68    2.10171    4.33325   106%     -    0s
+     0     0    4.32168    0   63    2.10171    4.32168   106%     -    0s
+     0     0    4.32017    0   66    2.10171    4.32017   106%     -    0s
+     0     0    4.31959    0   64    2.10171    4.31959   106%     -    0s
+     0     0    4.31959    0   65    2.10171    4.31959   106%     -    0s
+     0     0    4.09274    0   64    2.10171    4.09274  94.7%     -    0s
+     0     0    4.05736    0   67    2.10171    4.05736  93.1%     -    0s
+     0     0    4.03985    0   64    2.10171    4.03985  92.2%     -    0s
+     0     0    4.03450    0   64    2.10171    4.03450  92.0%     -    0s
+     0     0    3.98112    0   64    2.10171    3.98112  89.4%     -    0s
+     0     0    3.94537    0   63    2.10171    3.94537  87.7%     -    0s
+     0     0    3.93495    0   66    2.10171    3.93495  87.2%     -    0s
+     0     0    3.93227    0   67    2.10171    3.93227  87.1%     -    0s
+     0     0    3.93130    0   66    2.10171    3.93130  87.1%     -    0s
+     0     0    3.93114    0   66    2.10171    3.93114  87.0%     -    0s
+     0     0    3.88355    0   65    2.10171    3.88355  84.8%     -    0s
+     0     0    3.86900    0   66    2.10171    3.86900  84.1%     -    0s
+     0     0    3.86867    0   67    2.10171    3.86867  84.1%     -    0s
+     0     0    3.84360    0   68    2.10171    3.84360  82.9%     -    0s
+     0     0    3.83406    0   68    2.10171    3.83406  82.4%     -    0s
+     0     0    3.83302    0   71    2.10171    3.83302  82.4%     -    0s
+     0     0    3.83278    0   72    2.10171    3.83278  82.4%     -    0s
+     0     0    3.79841    0   69    2.10171    3.79841  80.7%     -    0s
+     0     0    3.79020    0   69    2.10171    3.79020  80.3%     -    0s
+     0     0    3.76487    0   77    2.10171    3.76487  79.1%     -    0s
+     0     0    3.76043    0   76    2.10171    3.76043  78.9%     -    0s
+     0     0    3.76034    0   72    2.10171    3.76034  78.9%     -    0s
+     0     0    3.75284    0   78    2.10171    3.75284  78.6%     -    0s
+     0     0    3.75220    0   73    2.10171    3.75220  78.5%     -    0s
+     0     0    3.75220    0   91    2.10171    3.75220  78.5%     -    0s
+     0     0    3.75220    0   91    2.10171    3.75220  78.5%     -    0s
+     0     2    3.75220    0   91    2.10171    3.75220  78.5%     -    0s
+
+Cutting planes:
+  Cover: 20
+  Implied bound: 5
+  MIR: 44
+  RLT: 8
+  Relax-and-lift: 8
+  Lazy constraints: 104
+
+Explored 96 nodes (10376 simplex iterations) in 1.03 seconds (0.43 work units)
+Thread count was 12 (of 12 available processors)
+
+Solution count 1: 2.10171 
+
+Time limit reached
+Best objective 2.101712585917e+00, best bound 3.740829853294e+00, gap 77.9896%
+
+User-callback calls 915, time in user-callback 0.23 sec
+Warning: constraint name "vertex to district[0]" has a space

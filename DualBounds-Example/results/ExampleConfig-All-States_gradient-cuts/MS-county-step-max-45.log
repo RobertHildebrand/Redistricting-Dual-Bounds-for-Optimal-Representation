@@ -1,0 +1,174 @@
+
+Gurobi 10.0.2 (mac64[x86]) logging started Fri Sep 27 10:34:17 2024
+
+Set parameter LogFile to value "results/ExampleConfig-All-States_gradient-cuts/MS-county-step-max-45.log"
+Set parameter TimeLimit to value 10
+
+Gurobi 10.0.2 (mac64[x86]) logging started Fri Sep 27 10:34:17 2024
+
+Set parameter LogFile to value "results/ExampleConfig-All-States_gradient-cuts/MS-county-step-max-45.log"
+Set parameter TimeLimit to value 10
+Gurobi Optimizer version 10.0.2 build v10.0.2rc0 (mac64[x86])
+
+CPU model: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
+Thread count: 6 physical cores, 12 logical processors, using up to 12 threads
+
+Optimize a model with 219 rows, 1013 columns and 5114 nonzeros
+Model fingerprint: 0x17ec3c48
+Variable types: 334 continuous, 679 integer (679 binary)
+Coefficient statistics:
+  Matrix range     [4e-02, 6e+05]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 6e+05]
+  RHS range        [1e+00, 8e+05]
+
+User MIP start produced solution with objective 1.66478 (0.06s)
+Loaded user MIP start with objective 1.66478
+
+Presolve removed 30 rows and 0 columns
+Presolve time: 0.01s
+Presolved: 189 rows, 1013 columns, 4798 nonzeros
+Variable types: 326 continuous, 687 integer (679 binary)
+Root relaxation presolved: 172 rows, 1030 columns, 4457 nonzeros
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Root barrier log...
+
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA' NZ     : 1.791e+03
+ Factor NZ  : 2.519e+03 (roughly 1 MB of memory)
+ Factor Ops : 4.812e+04 (less than 1 second per iteration)
+ Threads    : 1
+
+Barrier performed 0 iterations in 0.11 seconds (0.04 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with primal simplex
+
+Root relaxation: objective 1.712251e+00, 408 iterations, 0.03 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    1.71225    0   30    1.66478    1.71225  2.85%     -    0s
+     0     0    1.71225    0   36    1.66478    1.71225  2.85%     -    0s
+     0     0    1.71225    0   38    1.66478    1.71225  2.85%     -    0s
+     0     0    1.71216    0   32    1.66478    1.71216  2.85%     -    0s
+     0     0    1.71216    0   39    1.66478    1.71216  2.85%     -    0s
+     0     0    1.71216    0   35    1.66478    1.71216  2.85%     -    0s
+     0     0    1.71216    0   32    1.66478    1.71216  2.85%     -    0s
+     0     0    1.71216    0   36    1.66478    1.71216  2.85%     -    0s
+     0     0    1.71216    0   34    1.66478    1.71216  2.85%     -    0s
+     0     2    1.71213    0   38    1.66478    1.71213  2.84%     -    1s
+ 13006  8291    1.68137   30   57    1.66478    1.69664  1.91%  15.5    5s
+ 34095 23834    1.68133   40   28    1.66478    1.68342  1.12%  18.7   10s
+
+Cutting planes:
+  Lazy constraints: 434
+
+Explored 34286 nodes (644233 simplex iterations) in 10.01 seconds (5.25 work units)
+Thread count was 12 (of 12 available processors)
+
+Solution count 1: 1.66478 
+
+Time limit reached
+Best objective 1.664776460625e+00, best bound 1.683417125001e+00, gap 1.1197%
+
+User-callback calls 70355, time in user-callback 2.03 sec
+Warning: variable name "lam(0, 0, 'in')" has a space
+Warning: constraint name "vertex to district[0]" has a space
+Warning: to let Gurobi read it back, use rlp format
+Warning: variable name "lam(0, 0, 'in')" has a space
+Warning: default variable names used to write solution file
+
+Gurobi 10.0.2 (mac64[x86]) logging started Fri Sep 27 11:04:59 2024
+
+Set parameter LogFile to value "results/ExampleConfig-All-States_gradient-cuts/MS-county-step-max-45.log"
+Set parameter TimeLimit to value 10
+
+Gurobi 10.0.2 (mac64[x86]) logging started Fri Sep 27 11:04:59 2024
+
+Set parameter LogFile to value "results/ExampleConfig-All-States_gradient-cuts/MS-county-step-max-45.log"
+Set parameter TimeLimit to value 10
+Gurobi Optimizer version 10.0.2 build v10.0.2rc0 (mac64[x86])
+
+CPU model: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
+Thread count: 6 physical cores, 12 logical processors, using up to 12 threads
+
+Optimize a model with 219 rows, 1013 columns and 5114 nonzeros
+Model fingerprint: 0x17ec3c48
+Variable types: 334 continuous, 679 integer (679 binary)
+Coefficient statistics:
+  Matrix range     [4e-02, 6e+05]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 6e+05]
+  RHS range        [1e+00, 8e+05]
+
+User MIP start produced solution with objective 1.66478 (0.07s)
+Loaded user MIP start with objective 1.66478
+
+Presolve removed 30 rows and 0 columns
+Presolve time: 0.01s
+Presolved: 189 rows, 1013 columns, 4798 nonzeros
+Variable types: 326 continuous, 687 integer (679 binary)
+Root relaxation presolved: 172 rows, 1030 columns, 4457 nonzeros
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Root barrier log...
+
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA' NZ     : 1.791e+03
+ Factor NZ  : 2.519e+03 (roughly 1 MB of memory)
+ Factor Ops : 4.812e+04 (less than 1 second per iteration)
+ Threads    : 1
+
+Barrier performed 0 iterations in 0.12 seconds (0.04 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with primal simplex
+
+Root relaxation: objective 1.712251e+00, 408 iterations, 0.03 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    1.71225    0   30    1.66478    1.71225  2.85%     -    0s
+     0     0    1.71225    0   36    1.66478    1.71225  2.85%     -    0s
+     0     0    1.71225    0   38    1.66478    1.71225  2.85%     -    0s
+     0     0    1.71216    0   32    1.66478    1.71216  2.85%     -    0s
+     0     0    1.71216    0   39    1.66478    1.71216  2.85%     -    0s
+     0     0    1.71216    0   35    1.66478    1.71216  2.85%     -    0s
+     0     0    1.71216    0   32    1.66478    1.71216  2.85%     -    0s
+     0     0    1.71216    0   36    1.66478    1.71216  2.85%     -    0s
+     0     0    1.71216    0   34    1.66478    1.71216  2.85%     -    0s
+     0     2    1.71213    0   38    1.66478    1.71213  2.84%     -    1s
+ 12972  8156    1.68189   29   50    1.66478    1.69664  1.91%  15.5    5s
+ 34095 24023    1.68133   40   28    1.66478    1.68342  1.12%  18.7   10s
+
+Cutting planes:
+  Lazy constraints: 434
+
+Explored 34509 nodes (649242 simplex iterations) in 10.02 seconds (5.29 work units)
+Thread count was 12 (of 12 available processors)
+
+Solution count 1: 1.66478 
+
+Time limit reached
+Best objective 1.664776460625e+00, best bound 1.683417125001e+00, gap 1.1197%
+
+User-callback calls 70860, time in user-callback 2.02 sec
+Warning: variable name "lam(0, 0, 'in')" has a space
+Warning: constraint name "vertex to district[0]" has a space
+Warning: to let Gurobi read it back, use rlp format
+Warning: variable name "lam(0, 0, 'in')" has a space
+Warning: default variable names used to write solution file

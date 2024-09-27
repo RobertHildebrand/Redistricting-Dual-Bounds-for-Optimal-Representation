@@ -25,27 +25,27 @@ def add_bvap_vap(m, G, k, U, bounds = None, comparison = False, bvap_ordering = 
         # vap = voting age population in district j
         # Option to add specific bounds rather than a more general bound
     if bounds == None:
-        vap = {j : m.addVar(name = f"vap{j}", ub = U)   for j in range(k)} 
-        bvap = {j : m.addVar(name = f"bvap{j}", ub = U)  for j in range(k)} 
+        m._vap = {j : m.addVar(name = f"vap{j}", ub = U)   for j in range(k)} 
+        m._bvap = {j : m.addVar(name = f"bvap{j}", ub = U)  for j in range(k)} 
     else:
-        vap = {j : m.addVar(name = f"vap{j}", lb = bounds['vap']['lb'][j], ub = bounds['vap']['ub'][j])   for j in range(k)}
-        bvap = {j : m.addVar(name = f"bvap{j}", lb = bounds['bvap']['lb'][j], ub = bounds['bvap']['ub'][j]) for j in range(k)} 
+        m._vap = {j : m.addVar(name = f"vap{j}", lb = bounds['vap']['lb'][j], ub = bounds['vap']['ub'][j])   for j in range(k)}
+        m._bvap = {j : m.addVar(name = f"bvap{j}", lb = bounds['bvap']['lb'][j], ub = bounds['bvap']['ub'][j]) for j in range(k)} 
     
     
     ##  VOTING AGE POPULATION AND BVAP POPULATION
-    m.addConstrs(( sum(VAP[i]*m._X[i,j]    for i in G.nodes) ==  vap[j]   for j in range(k)  ), name="VAP_Block_j")
-    m.addConstrs(( sum(BVAP[i]*m._X[i,j]   for i in G.nodes) ==  bvap[j]  for j in range(k)  ), name="BVAP_Block_j")
+    m.addConstrs(( sum(VAP[i]*m._X[i,j]    for i in G.nodes) ==  m._vap[j]   for j in range(k)  ), name="VAP_Block_j")
+    m.addConstrs(( sum(BVAP[i]*m._X[i,j]   for i in G.nodes) ==  m._bvap[j]  for j in range(k)  ), name="BVAP_Block_j")
     
     # Natural comparison bounds on vap vs bvap
     if comparison:
-        m.addConstrs((  vap[j]  >=  bvap[j]  for j in range(k)  ), name="VAP_BVAP_compare_j")
+        m.addConstrs((  m._vap[j]  >=  m._bvap[j]  for j in range(k)  ), name="VAP_BVAP_compare_j")
     
     # Order bvap variables
     if bvap_ordering:
         print("Adding bvap ordering")
-        m.addConstrs( (bvap[j] <= bvap[j+1]  for j in range(k-1)), name='ordering_bvap' )
+        m.addConstrs( (m._bvap[j] <= m._bvap[j+1]  for j in range(k-1)), name='ordering_bvap' )
     
-    return BVAP, VAP, VAP_TOTAL, BVAP_TOTAL, vap, bvap    
+    return BVAP, VAP, VAP_TOTAL, BVAP_TOTAL, m._vap, m._bvap    
 
 def add_bvap_vap_continuous(m, G, k, U, bounds = None, comparison = False, bvap_ordering = False):
     '''
@@ -604,12 +604,12 @@ def add_LogEPWL_objective_extra_bounds_great(m,G,k,L,U, bounds):
 
 
 # BNPWL Forumulation
-def add_BNPWL_objective(m, G, K, R, U):
+def add_BNPWL_objective(m, G, K, R, U, bounds = None):
     '''
     
     '''
     # Add bvap and vap
-    BVAP, VAP, VAP_TOTAL, BVAP_TOTAL, vap, bvap = add_bvap_vap(m, G, k, U)
+    BVAP, VAP, VAP_TOTAL, BVAP_TOTAL, vap, bvap = add_bvap_vap(m, G, K, U)
     
     BIGNORM = math.sqrt(BVAP_TOTAL**2+U**2)
     node_norms = [math.sqrt(BVAP[i]**2+VAP[i]**2)  for i in G.nodes]
@@ -633,7 +633,7 @@ def add_BNPWL_objective(m, G, K, R, U):
         j = 2**nu - i - 1
         value1 = math.cos( (j+1) * (math.pi) / n )
         value2 = math.sin( (j+1) * (math.pi) / n )
-        return f_bvap(value2/value1)
+        return hm.f_bvap(value2/value1)
     
     '''
     Input:  coordinates y_value,z_value >= 0, 

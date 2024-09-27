@@ -3,15 +3,26 @@
 As mentioned before, this code is largely forked from https://github.com/hamidrezavalidi/Political-Districting-to-Minimize-Cut-Edges.
 We append their readme.md file below for details on how their code works.
 
-Their code was modified to add a number of new models for optimization to compute dual bounds for several problems in political and minority representation.  Please see Example.ipynb for a notebook demonstrating the usage of the code.   
+Their code was modified to add a number of new models for optimization to compute dual bounds for several problems in political and minority representation.  
 
+## Examples
+Please see the following two examples:
+
+- Example-AL.ipynb for a notebook demonstrating the usage each approach on the Alabama dataset
+- Example-All-States-gradient-cuts.ipynb for a notebook demonstrating appyling the gradient cuts approach to all states called from a single config file
+
+## Computer compatability
 This code was run on 2018 MacBook Pro, and also a Windows Desktop.   See requirements.txt for the package versions that were used on the 2018 MacBook Pro.   This is probably compatible with other versions of these packages, but we make no such gaurantee.
 
+## Layout of the code
+For the main BVAP models, the main.py file sets up most of the model.  Objectives are ported in from main_bvap.py and constraints and other functionality is ported in from labeling.py, hess.py, ordering.py, and fixing.py.   In order to clean up the code, the config_data.json file was created.    
+    This json holds various data to be importated about the states and also about all of the objective functions.  Thus, the set of possible objective functions are loaded from this conig file.  Objective functions are then defined in the bvap.py file.
+    
 
 
 
 
-## Political Districting to Minimize Cut Edges (by Hamidreza Validi and Austin Buchanan)
+# Political Districting to Minimize Cut Edges (by Hamidreza Validi and Austin Buchanan)
 (This section is borrowed directly from https://github.com/hamidrezavalidi/Political-Districting-to-Minimize-Cut-Edges/blob/master/README.md).
 
 Python code for the [paper](https://github.com/hamidrezavalidi/Political-Districting-to-Minimize-Cut-Edges/blob/master/Political_districting_to_minimize_cut_edges.pdf) "Political districting to minimize cut edges" by Hamidreza Validi and Austin Buchanan.

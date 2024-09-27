@@ -1,5 +1,5 @@
 {
-    "AL_step-max_bvap_gradient_cuts_test": {
+    "AL_step-max_bvap": {
         "state": "AL",
         "level": "county",
         "base": "labeling",

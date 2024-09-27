@@ -1,0 +1,22 @@
+{
+    "AL_BNPWL_bvap": {
+        "state": "AL",
+        "level": "county",
+        "base": "labeling",
+        "obj": "BNPWL",
+        "R": 5,
+        "dist_bounds": false,
+        "tlimit": 1,
+		"numGCuts": 0,
+		"timeGCuts":10,
+        "fixing": false,
+        "contiguity": "lcut",
+        "symmetry": "none",
+        "extended": false,
+        "order": "bvap",
+        "heuristic": true,
+        "lp": false,
+        "obj_order": false,
+        "index": 0
+    }
+}
